@@ -1,8 +1,4 @@
-# Windows Event Logs Parser 
-
-Analogy data Provide for windows Event Logs
-
-
+# Windows Event Logs Parser   <img src="./Assets/AnalogyWindows.png" align="right" width="155px" height="155px">
 
 
 <p align="center">
@@ -23,3 +19,11 @@ Analogy data Provide for windows Event Logs
     <img src="http://img.shields.io/github/commits-since/Analogy-LogViewer/Analogy.LogViewer.WindowsEventLogs/latest" img alt="Commits Since Latest Release"/>
 </a> 
 </p>
+
+
+
+
+
+
+Analogy data Provide for windows Event Logs
+

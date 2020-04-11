@@ -14,7 +14,8 @@ namespace Analogy.LogViewer.WindowsEventLogs.IAnalogy
         public UserControl DataProviderSettings { get; }=new EventLogsSettings();
         public Image SmallImage { get; }
         public Image LargeImage { get; }
-        public Guid FactoryId { get; } = EventLogDataFactory.id;
+        public Guid FactoryId { get; set; } = EventLogDataFactory.id;
+        public Guid ID { get; set; } = new Guid("61774F7C-4F62-4A61-AD24-FC8263DF518A");
 
         public Task SaveSettingsAsync()
         {

@@ -15,7 +15,7 @@
     <RepositoryUrl>https://github.com/Analogy-LogViewer/Analogy.LogViewer.WindowsEventLogs</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <PackageReleaseNotes>Initial POC</PackageReleaseNotes>
-    <PackageIcon>Analogy.GitHistoryBanner.png</PackageIcon>
+    <PackageIcon>AnalogyWindows.png</PackageIcon>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
   </PropertyGroup>
 
@@ -49,7 +49,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="..\Assets\Analogy.GitHistoryBanner.png">
+    <None Include="..\Assets\AnalogyWindows.png">
       <Pack>True</Pack>
       <PackagePath></PackagePath>
     </None>

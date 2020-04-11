@@ -22,12 +22,7 @@ namespace Analogy.LogViewer.WindowsEventLogs
         public event EventHandler<AnalogyDataSourceDisconnectedArgs> OnDisconnected;
         public event EventHandler<AnalogyLogMessageArgs> OnMessageReady;
         public event EventHandler<AnalogyLogMessagesArgs> OnManyMessagesReady;
-
-        public RealTimeEventLogs()
-        {
-         
-        }
-
+        
         public Task InitializeDataProviderAsync(IAnalogyLogger logger)
         {
             LogManager.Instance.SetLogger(logger);
@@ -43,6 +38,7 @@ namespace Analogy.LogViewer.WindowsEventLogs
         {
             try
             {
+                SetupLogs();
             }
             catch (Exception e)
             {
@@ -66,46 +62,40 @@ namespace Analogy.LogViewer.WindowsEventLogs
                 eventLog.Dispose();
             }
             Logs.Clear();
-            Counter alllogs = new Counter("All");
-            foreach (string eventLog in UserSettingsManager.UserSettings.Logs)
+            Counter all = new Counter("All");
+            foreach (string logName in UserSettingsManager.UserSettings.Logs)
             {
-                SetUpLog(alllogs, eventLog);
-            }
-        }
-
-        private void SetUpLog(Counter all, string logName)
-        {
-            try
-            {
-                if (EventLog.Exists(logName))
+                try
                 {
-                    var eventLog = new EventLog(logName);
-                    Logs.Add(eventLog);
-                    Counter c = new Counter(logName);
-                    // set event handler
-                    eventLog.EntryWritten += (apps, arg) =>
+                    if (EventLog.Exists(logName))
                     {
-                        all.Increment();
-                        c.Increment();
-     
-                        AnalogyLogMessage m = CreateMessageFromEvent(arg.Entry);
-                        m.Module = logName;
-                        OnMessageReady?.Invoke(this,new AnalogyLogMessageArgs(m,Environment.MachineName,"Windows Event Logs",ID));
-                    };
+                        var eventLog = new EventLog(logName);
+                        Logs.Add(eventLog);
+                        Counter c = new Counter(logName);
+                        // set event handler
+                        eventLog.EntryWritten += (apps, arg) =>
+                        {
+                            all.Increment();
+                            c.Increment();
 
-                    eventLog.EnableRaisingEvents = true;
+                            AnalogyLogMessage m = CreateMessageFromEvent(arg.Entry);
+                            m.Module = logName;
+                            OnMessageReady?.Invoke(this, new AnalogyLogMessageArgs(m, Environment.MachineName, "Windows Event Logs", ID));
+                        };
+
+                        eventLog.EnableRaisingEvents = true;
+                    }
+                }
+                catch (Exception e)
+                {
+                    string m = "Error Opening log. Please make sure you are running as Administrator." + Environment.NewLine + "Error:" + e.Message;
+                    MessageBox.Show(m, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    AnalogyLogMessage l = new AnalogyLogMessage(m, AnalogyLogLevel.Error, AnalogyLogClass.General, "Analogy", "None");
+                    OnMessageReady?.Invoke(this, new AnalogyLogMessageArgs(l, Environment.MachineName, "Windows Event Logs", ID));
+                    LogManager.Instance.LogException(e, "Windows Event Logs", $"Error reading event log: {e.Message}");
                 }
             }
-            catch (Exception e)
-            {
-                string m = "Error Opening log. Please make sure you are running as Administrator." + Environment.NewLine + "Error:" + e.Message;
-                MessageBox.Show(m, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                AnalogyLogMessage l = new AnalogyLogMessage(m, AnalogyLogLevel.Error, AnalogyLogClass.General, "Analogy", "None");
-                OnMessageReady?.Invoke(this,new AnalogyLogMessageArgs(l, Environment.MachineName,"Windows Event Logs", ID));
-                LogManager.Instance.LogException(e, "Windows Event Logs",$"Error reading event log: {e.Message}");
-            }
         }
-
 
         private class Counter
         {

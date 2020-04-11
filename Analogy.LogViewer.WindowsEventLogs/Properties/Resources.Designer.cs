@@ -8,7 +8,10 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Analogy.LogViewer.GitHistory.Properties {
+namespace Analogy.LogViewer.WindowsEventLogs.Properties {
+    using System;
+    
+    
     /// <summary>
     ///   A strongly-typed resource class, for looking up localized strings, etc.
     /// </summary>
@@ -63,6 +66,26 @@ namespace Analogy.LogViewer.GitHistory.Properties {
         internal static System.Drawing.Bitmap Delete_16x16 {
             get {
                 object obj = ResourceManager.GetObject("Delete_16x16", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap OperatingSystem_16x16 {
+            get {
+                object obj = ResourceManager.GetObject("OperatingSystem_16x16", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap OperatingSystem_32x32 {
+            get {
+                object obj = ResourceManager.GetObject("OperatingSystem_32x32", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

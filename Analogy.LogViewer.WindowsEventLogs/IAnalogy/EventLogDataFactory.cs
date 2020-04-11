@@ -7,7 +7,7 @@ namespace Analogy.LogViewer.WindowsEventLogs.IAnalogy
 {
     public class EventLogDataFactory : IAnalogyFactory
     {
-        public static Guid id = new Guid("3949DB4C-0E22-4795-92C1-61B05EDB3F6C");
+        public static Guid id = new Guid("3999DB4C-0E22-4795-92C1-61B05EDB3F6C");
         public Guid FactoryId { get; } = id;
         public string Title { get; } = "Windows Event logs";
         public IEnumerable<IAnalogyChangeLog> ChangeLog { get; } = new List<IAnalogyChangeLog>();

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
@@ -36,7 +37,12 @@ namespace Analogy.LogViewer.WindowsEventLogs.IAnalogy
 
         public Guid ID { get; }
         public string OptionalTitle { get; }
+        public bool UseCustomColors { get; set; } = false;
+        public IEnumerable<(string originalHeader, string replacementHeader)> GetReplacementHeaders()
+            => Array.Empty<(string, string)>();
 
+        public (Color backgroundColor, Color foregroundColor) GetColorForMessage(IAnalogyLogMessage logMessage)
+            => (Color.Empty, Color.Empty);
         public WindowsEventLogFile(string fileNamePath, Guid id)
         {
 

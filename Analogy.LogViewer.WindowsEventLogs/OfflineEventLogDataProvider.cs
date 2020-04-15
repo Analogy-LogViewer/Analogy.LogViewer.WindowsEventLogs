@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -10,9 +11,14 @@ using Analogy.Interfaces;
 namespace Analogy.LogViewer.WindowsEventLogs
 {
     public class OfflineEventLogDataProvider : IAnalogyOfflineDataProvider
-    {
-        public string OptionalTitle { get; } = "Windows Event Log Data Provider";
+    { public string OptionalTitle { get; } = "Windows Event Log Data Provider";
         public Guid ID { get; } = new Guid("465F4963-71F3-4E50-8253-FA286BF5692B");
+        public bool UseCustomColors { get; set; } = false;
+        public IEnumerable<(string originalHeader, string replacementHeader)> GetReplacementHeaders()
+            => Array.Empty<(string, string)>();
+
+        public (Color backgroundColor, Color foregroundColor) GetColorForMessage(IAnalogyLogMessage logMessage)
+            => (Color.Empty, Color.Empty);
         public Task InitializeDataProviderAsync(IAnalogyLogger logger)
         {
             return Task.CompletedTask;

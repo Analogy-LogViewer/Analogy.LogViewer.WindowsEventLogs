@@ -17,7 +17,7 @@
     <PackageReleaseNotes>update API with interface assembly</PackageReleaseNotes>
     <PackageIcon>AnalogyWindows.png</PackageIcon>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Version>1.0.4</Version>
+    <Version>1.0.5</Version>
     <Company>Analogy.LogViewer</Company>
   </PropertyGroup>
 

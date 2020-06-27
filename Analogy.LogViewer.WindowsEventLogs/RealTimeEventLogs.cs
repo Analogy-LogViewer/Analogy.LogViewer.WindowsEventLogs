@@ -148,7 +148,7 @@ namespace Analogy.LogViewer.WindowsEventLogs
 
             m.Category = eEntry.Category;
             m.Date = eEntry.TimeGenerated;
-            m.ID = Guid.NewGuid();
+            m.Id = Guid.NewGuid();
             m.Source = eEntry.Source;
             m.Text = eEntry.Message;
             m.User = eEntry.UserName;

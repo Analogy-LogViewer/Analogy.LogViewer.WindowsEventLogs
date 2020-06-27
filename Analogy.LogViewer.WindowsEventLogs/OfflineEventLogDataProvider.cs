@@ -53,7 +53,7 @@ namespace Analogy.LogViewer.WindowsEventLogs
                 Level = AnalogyLogLevel.Critical,
                 Source = "Analogy",
                 Module = System.Diagnostics.Process.GetCurrentProcess().ProcessName,
-                ProcessID = System.Diagnostics.Process.GetCurrentProcess().Id,
+                ProcessId = System.Diagnostics.Process.GetCurrentProcess().Id,
                 Class = AnalogyLogClass.General,
                 User = Environment.UserName,
                 Date = DateTime.Now

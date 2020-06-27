@@ -50,8 +50,10 @@ namespace Analogy.LogViewer.WindowsEventLogs
                                     Source = record.ProviderName,
                                     Module = record.ProviderName,
                                     Level = AnalogyLogLevel.Event,
-                                    ID = record.ActivityId ?? Guid.Empty,
-                                    ProcessID = record.ProcessId ?? 0,
+                                    Id = record.ActivityId ?? Guid.Empty,
+                                    ProcessId = record.ProcessId ?? 0,
+                                    MachineName= record.MachineName,
+                                    ThreadId =record.ThreadId??0,
                                     FileName = fileName,
                                     User = record.UserId?.Value
                                 };

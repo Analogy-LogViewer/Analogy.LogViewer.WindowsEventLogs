@@ -99,7 +99,6 @@ jobs:
   push-nuget:
     name: 'Push NuGet Packages'
     needs: build
-    if: github.event_name == 'release'
     runs-on: windows-latest
     steps:
       - name: 'Download Artifact'
@@ -108,7 +107,7 @@ jobs:
           name: 'windows-latest'
       - name: 'Dotnet NuGet Push'
         run: |
-          Get-ChildItem .\windows-latest -Filter *.nupkg |
+          Get-ChildItem .\windows-latest -Filter *.*nupkg |
           Where-Object { !$_.Name.Contains('preview') } |
           ForEach-Object { dotnet nuget push $_ --source https://api.nuget.org/v3/index.json --skip-duplicate --api-key ${{secrets.NUGET_API_KEY}} }
         shell: pwsh

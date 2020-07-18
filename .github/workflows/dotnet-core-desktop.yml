@@ -94,7 +94,7 @@ jobs:
     - name: 'Publish Artifacts'   
       uses: actions/upload-artifact@v1.0.0
       with:
-        name: 'Publish Artifacts for windows'
+        name: 'artifactory'
         path: ./Analogy.LogViewer.WindowsEventLogs/bin/${{ matrix.configuration }}
   push-nuget:
     name: 'Push NuGet Packages'

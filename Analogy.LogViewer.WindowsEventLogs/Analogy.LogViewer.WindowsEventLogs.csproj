@@ -8,7 +8,6 @@
 		<IncludeSymbols>true</IncludeSymbols>
 		<SymbolPackageFormat>snupkg</SymbolPackageFormat>
 		<Authors>Lior Banai</Authors>
-		<GenerateResourceUsePreserializedResources>true</GenerateResourceUsePreserializedResources>
 		<Description>Extension for Analogy Log Viewer that shows Windows Event logs and read local *.Evtx files</Description>
 		<Copyright>Copyright @ Lior Banai 2020</Copyright>
 		<PackageLicenseExpression>MIT</PackageLicenseExpression>
@@ -18,8 +17,11 @@
 		<PackageReleaseNotes>update API with interface assembly</PackageReleaseNotes>
 		<PackageIcon>AnalogyWindows.png</PackageIcon>
 		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-		<Version>1.1.0</Version>
+		<Version>1.1.0.1</Version>
 		<Company>Analogy.LogViewer</Company>
+		<AssemblyVersion>1.1.0.1</AssemblyVersion>
+		<FileVersion>1.1.0.1</FileVersion>
+		<GenerateResourceUsePreserializedResources>true</GenerateResourceUsePreserializedResources>
 	</PropertyGroup>
 
 	<ItemGroup>
@@ -34,7 +36,7 @@
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 		</PackageReference>
 		<PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
-		<PackageReference Include="System.Resources.Extensions" Version="4.6.0"/>
+		<PackageReference Include="System.Resources.Extensions" Version="4.6.0" />
 	</ItemGroup>
 
 	<ItemGroup>

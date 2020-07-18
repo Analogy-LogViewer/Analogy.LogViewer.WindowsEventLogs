@@ -24,7 +24,7 @@ namespace Analogy.LogViewer.WindowsEventLogs.IAnalogy
                 new WindowsEventLogFile(Path.Combine(Environment.ExpandEnvironmentVariables("%SystemRoot%"), "System32", "Winevt", "Logs", "System.evtx"),new Guid("17C93A69-2D7D-4620-9289-6889DE4EFC79")),
                 new WindowsEventLogFile(Path.Combine(Environment.ExpandEnvironmentVariables("%SystemRoot%"), "System32", "Winevt", "Logs", "Application.evtx"),new Guid("27C93A69-2D7D-4620-9289-6889DE4EFC80")),
                 new WindowsEventLogFile(Path.Combine(Environment.ExpandEnvironmentVariables("%SystemRoot%"), "System32", "Winevt", "Logs", "Security.evtx"),new Guid("37C93A69-2D7D-4620-9289-6889DE4EFC80")),
-                new WindowsEventLogFile(Path.Combine(Environment.ExpandEnvironmentVariables("%SystemRoot%"), "System32", "Winevt", "Logs", "Security.evtx"),new Guid("47C93A69-2D7D-4620-9289-6889DE4EFC80")),
+                new WindowsEventLogFile(Path.Combine(Environment.ExpandEnvironmentVariables("%SystemRoot%"), "System32", "Winevt", "Logs", "Setup.evtx"),new Guid("47C93A69-2D7D-4620-9289-6889DE4EFC80")),
 
             };
         }

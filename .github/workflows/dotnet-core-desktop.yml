@@ -84,8 +84,7 @@ jobs:
       run: msbuild $env:Solution_Name /t:Restore /p:Configuration=$env:Configuration
       env:
         Configuration: ${{ matrix.configuration }}
-    - name: 'Publish Artifacts'
-        if: github.event_name == 'release'
+    - name: 'Publish Artifacts'   
       uses: actions/upload-artifact@v1.0.0
       with:
         name: 'Publish Artifacts for windows'

@@ -12,7 +12,6 @@
 <a href="https://github.com/Analogy-LogViewer/Analogy.LogViewer.WindowsEventLogs/blob/master/LICENSE.md">
     <img src="http://img.shields.io/github/license/Analogy-LogViewer/Analogy.LogViewer.WindowsEventLogs" img alt="License"/>
 </a> 
-
  [![Nuget](https://img.shields.io/nuget/v/Analogy.LogViewer.WindowsEventLogs)](https://www.nuget.org/packages/Analogy.LogViewer.WindowsEventLogs/)
 <a href="https://github.com/Analogy-LogViewer/Analogy.LogViewer.WindowsEventLogs/releases">
     <img src="http://img.shields.io/github/v/release/Analogy-LogViewer/Analogy.LogViewer.WindowsEventLogs" img alt="Latest Release"/>

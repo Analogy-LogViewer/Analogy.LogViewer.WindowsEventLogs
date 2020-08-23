@@ -40,7 +40,7 @@ namespace Analogy.LogViewer.WindowsEventLogs
             //nop
         }
 
-        public void StartReceiving()
+        public Task StartReceiving()
         {
             try
             {
@@ -50,14 +50,12 @@ namespace Analogy.LogViewer.WindowsEventLogs
             {
                 LogManager.Instance.LogError(nameof(StartReceiving), $@"Error reading: {e}");
             }
-
+            return Task.CompletedTask;
         }
 
 
-        public void StopReceiving()
-        {
-            //nop
-        }
+        public Task StopReceiving() => Task.CompletedTask;
+
 
 
         private void SetupLogs()

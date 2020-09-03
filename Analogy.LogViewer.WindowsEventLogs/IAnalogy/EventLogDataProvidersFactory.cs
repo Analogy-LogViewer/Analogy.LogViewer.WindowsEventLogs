@@ -35,7 +35,9 @@ namespace Analogy.LogViewer.WindowsEventLogs.IAnalogy
         public bool DisableFilePoolingOption { get; } = true;
         public string FileNamePath { get; }
 
-        public Guid ID { get; }
+        public Guid Id { get; }
+        public Image LargeImage => null;
+        public Image SmallImage => null;
         public string OptionalTitle { get; }
         public bool UseCustomColors { get; set; } = false;
         public IEnumerable<(string originalHeader, string replacementHeader)> GetReplacementHeaders()
@@ -47,7 +49,7 @@ namespace Analogy.LogViewer.WindowsEventLogs.IAnalogy
         {
 
             FileNamePath = fileNamePath;
-            ID = id;
+            Id = id;
             OptionalTitle = Path.GetFileName(FileNamePath);
         }
         public Task InitializeDataProviderAsync(IAnalogyLogger logger)
@@ -57,7 +59,7 @@ namespace Analogy.LogViewer.WindowsEventLogs.IAnalogy
 
         public void MessageOpened(AnalogyLogMessage message)
         {
-           //nop
+            //nop
         }
 
         public async Task<IEnumerable<AnalogyLogMessage>> Process(CancellationToken token, ILogMessageCreatedHandler messagesHandler)
@@ -67,5 +69,5 @@ namespace Analogy.LogViewer.WindowsEventLogs.IAnalogy
             return messages;
         }
     }
-  
+
 }

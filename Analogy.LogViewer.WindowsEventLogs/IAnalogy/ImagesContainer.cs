@@ -1,7 +1,7 @@
-﻿using Analogy.DataProviders.Extensions;
-using Analogy.LogViewer.WindowsEventLogs.Properties;
+﻿using Analogy.LogViewer.WindowsEventLogs.Properties;
 using System;
 using System.Drawing;
+using Analogy.Interfaces;
 
 namespace Analogy.LogViewer.WindowsEventLogs.IAnalogy
 {

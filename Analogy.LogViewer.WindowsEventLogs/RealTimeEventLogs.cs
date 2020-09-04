@@ -15,12 +15,12 @@ namespace Analogy.LogViewer.WindowsEventLogs
     public class RealTimeEventLogs : IAnalogyRealTimeDataProvider
     {
         private List<EventLog> Logs = new List<EventLog>();
-        public Guid Id { get; } = new Guid("407C8AD7-E7A3-4B36-9221-BB5D48E78766");
-        public Image ConnectedLargeImage { get; } = null;
-        public Image ConnectedSmallImage { get; } = null;
-        public Image DisconnectedLargeImage { get; } = null;
-        public Image DisconnectedSmallImage { get; } = null;
-        public string OptionalTitle => "";
+        public Guid Id { get; set; } = new Guid("407C8AD7-E7A3-4B36-9221-BB5D48E78766");
+        public Image ConnectedLargeImage { get; set; } = null;
+        public Image ConnectedSmallImage { get; set; } = null;
+        public Image DisconnectedLargeImage { get; set; } = null;
+        public Image DisconnectedSmallImage { get; set; } = null;
+        public string OptionalTitle { get; set; } = "";
         public Task<bool> CanStartReceiving() => Task.FromResult(true);
         public IAnalogyOfflineDataProvider FileOperationsHandler { get; } = null;
         public bool IsConnected { get; } = true;

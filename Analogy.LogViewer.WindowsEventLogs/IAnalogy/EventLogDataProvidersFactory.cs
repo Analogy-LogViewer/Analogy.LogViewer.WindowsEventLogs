@@ -11,8 +11,8 @@ namespace Analogy.LogViewer.WindowsEventLogs.IAnalogy
 {
     public class EventLogDataProvidersFactory : IAnalogyDataProvidersFactory
     {
-        public Guid FactoryId { get; } = EventLogDataFactory.id;
-        public string Title { get; } = "Analogy Built-In Windows Event Log Data Provider";
+        public Guid FactoryId { get; set; } = EventLogDataFactory.id;
+        public string Title { get; set; } = "Analogy Built-In Windows Event Log Data Provider";
 
         public IEnumerable<IAnalogyDataProvider> DataProviders { get; }
         public EventLogDataProvidersFactory()
@@ -33,12 +33,12 @@ namespace Analogy.LogViewer.WindowsEventLogs.IAnalogy
     public class WindowsEventLogFile : IAnalogySingleFileDataProvider
     {
         public bool DisableFilePoolingOption { get; } = true;
-        public string FileNamePath { get; }
+        public string FileNamePath { get; set; }
 
-        public Guid Id { get; }
-        public Image LargeImage => null;
-        public Image SmallImage => null;
-        public string OptionalTitle { get; }
+        public Guid Id { get; set; }
+        public Image LargeImage { get; set; } = null;
+        public Image SmallImage { get; set; } = null;
+        public string OptionalTitle { get; set; }
         public bool UseCustomColors { get; set; } = false;
         public IEnumerable<(string originalHeader, string replacementHeader)> GetReplacementHeaders()
             => Array.Empty<(string, string)>();

@@ -12,10 +12,10 @@ namespace Analogy.LogViewer.WindowsEventLogs
 {
     public class OfflineEventLogDataProvider : IAnalogyOfflineDataProvider
     {
-        public string OptionalTitle { get; } = "Windows Event Log Data Provider";
-        public Guid Id { get; } = new Guid("465F4963-71F3-4E50-8253-FA286BF5692B");
-        public Image LargeImage => null;
-        public Image SmallImage => null;
+        public string OptionalTitle { get; set; } = "Windows Event Log Data Provider";
+        public Guid Id { get; set; } = new Guid("465F4963-71F3-4E50-8253-FA286BF5692B");
+        public Image LargeImage { get; set; } = null;
+        public Image SmallImage { get; set; } = null;
         public bool UseCustomColors { get; set; } = false;
         public IEnumerable<(string originalHeader, string replacementHeader)> GetReplacementHeaders()
             => Array.Empty<(string, string)>();

@@ -49,7 +49,7 @@ namespace Analogy.LogViewer.WindowsEventLogs
                                     Date = record.TimeCreated ?? DateTime.MinValue,
                                     Source = record.ProviderName,
                                     Module = record.ProviderName,
-                                    Level = AnalogyLogLevel.Event,
+                                    Level = AnalogyLogLevel.Information,
                                     Id = record.ActivityId ?? Guid.Empty,
                                     ProcessId = record.ProcessId ?? 0,
                                     MachineName= record.MachineName,
@@ -68,7 +68,7 @@ namespace Analogy.LogViewer.WindowsEventLogs
                                         switch (record.LevelDisplayName)
                                         {
                                             case "Information":
-                                                m.Level = AnalogyLogLevel.Event;
+                                                m.Level = AnalogyLogLevel.Information;
                                                 break;
                                             case "Error":
                                                 m.Level = AnalogyLogLevel.Error;
@@ -97,10 +97,10 @@ namespace Analogy.LogViewer.WindowsEventLogs
                                         switch (items[0])
                                         {
                                             case "Informational":
-                                                m.Level = AnalogyLogLevel.Event;
+                                                m.Level = AnalogyLogLevel.Information;
                                                 break;
                                             case "Information":
-                                                m.Level = AnalogyLogLevel.Event;
+                                                m.Level = AnalogyLogLevel.Information;
                                                 break;
                                             case "Error":
                                                 m.Level = AnalogyLogLevel.Error;
@@ -118,7 +118,7 @@ namespace Analogy.LogViewer.WindowsEventLogs
                                                 m.Level = AnalogyLogLevel.Verbose;
                                                 break;
                                             default:
-                                                m.Level = AnalogyLogLevel.Event;
+                                                m.Level = AnalogyLogLevel.Information;
                                                 break;
                                         }
                                     }
@@ -137,10 +137,10 @@ namespace Analogy.LogViewer.WindowsEventLogs
                                                     m.Level = AnalogyLogLevel.Warning;
                                                     break;
                                                 case 4:
-                                                    m.Level = AnalogyLogLevel.Event;
+                                                    m.Level = AnalogyLogLevel.Information;
                                                     break;
                                                 default:
-                                                    m.Level = AnalogyLogLevel.Event;
+                                                    m.Level = AnalogyLogLevel.Information;
                                                     break;
                                             }
                                         }
@@ -165,7 +165,7 @@ namespace Analogy.LogViewer.WindowsEventLogs
                         Class = AnalogyLogClass.General,
                         Source = "Analogy"
                     };
-                    LogManager.Instance.LogException(e, nameof(ReadFromFile), $"Error reading file:{e.Message}");
+                    LogManager.Instance.LogException($"Error reading file:{e.Message}",e, nameof(ReadFromFile));
                     messages.Add(m);
                     logWindow.AppendMessages(messages, GetFileNameAsDataSource(fileName));
                 }

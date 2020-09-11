@@ -100,7 +100,7 @@ namespace Analogy.LogViewer.WindowsEventLogs
                     MessageBox.Show(m, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     AnalogyLogMessage l = new AnalogyLogMessage(m, AnalogyLogLevel.Error, AnalogyLogClass.General, "Analogy", "None");
                     OnMessageReady?.Invoke(this, new AnalogyLogMessageArgs(l, Environment.MachineName, "Windows Event Logs", Id));
-                    LogManager.Instance.LogException(e, "Windows Event Logs", $"Error reading event log: {e.Message}");
+                    LogManager.Instance.LogException($"Error reading event log: {e.Message}",e, "Windows Event Logs");
                 }
             }
         }
@@ -135,16 +135,16 @@ namespace Analogy.LogViewer.WindowsEventLogs
                     m.Level = AnalogyLogLevel.Warning;
                     break;
                 case EventLogEntryType.Information:
-                    m.Level = AnalogyLogLevel.Event;
+                    m.Level = AnalogyLogLevel.Information;
                     break;
                 case EventLogEntryType.SuccessAudit:
-                    m.Level = AnalogyLogLevel.Event;
+                    m.Level = AnalogyLogLevel.Information;
                     break;
                 case EventLogEntryType.FailureAudit:
                     m.Level = AnalogyLogLevel.Error;
                     break;
                 default:
-                    m.Level = AnalogyLogLevel.Event;
+                    m.Level = AnalogyLogLevel.Information;
                     break;
             }
 

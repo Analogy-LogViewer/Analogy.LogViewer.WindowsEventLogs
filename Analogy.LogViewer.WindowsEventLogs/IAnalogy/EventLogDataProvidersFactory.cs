@@ -12,7 +12,7 @@ namespace Analogy.LogViewer.WindowsEventLogs.IAnalogy
     public class EventLogDataProvidersFactory : IAnalogyDataProvidersFactory
     {
         public Guid FactoryId { get; set; } = EventLogDataFactory.id;
-        public string Title { get; set; } = "Analogy Built-In Windows Event Log Data Provider";
+        public string Title { get; set; } = "Windows Event Log Data Provider";
 
         public IEnumerable<IAnalogyDataProvider> DataProviders { get; }
         public EventLogDataProvidersFactory()

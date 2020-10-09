@@ -20,7 +20,7 @@ namespace Analogy.LogViewer.WindowsEventLogs
         public Image ConnectedSmallImage { get; set; } = null;
         public Image DisconnectedLargeImage { get; set; } = null;
         public Image DisconnectedSmallImage { get; set; } = null;
-        public string OptionalTitle { get; set; } = "";
+        public string OptionalTitle { get; set; } = "Real Time Windows Event logs";
         public Task<bool> CanStartReceiving() => Task.FromResult(true);
         public IAnalogyOfflineDataProvider FileOperationsHandler { get; } = null;
         public bool IsConnected { get; } = true;

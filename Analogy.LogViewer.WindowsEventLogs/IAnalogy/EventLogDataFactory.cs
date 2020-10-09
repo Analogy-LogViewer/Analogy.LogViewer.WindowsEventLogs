@@ -14,7 +14,7 @@ namespace Analogy.LogViewer.WindowsEventLogs.IAnalogy
         public string Title { get; set; } = "Windows Event logs";
         public IEnumerable<IAnalogyChangeLog> ChangeLog { get; set; } = new List<IAnalogyChangeLog>();
         public IEnumerable<string> Contributors { get; set; } = new List<string>() { "Lior Banai" };
-        public string About { get; set; } = "Analogy Built-In Windows Event Log Data Provider";
+        public string About { get; set; } = "Windows Event Log Data Provider";
         public Image LargeImage { get; set; } = Resources.OperatingSystem_32x32;
         public Image SmallImage { get; set; } = Resources.OperatingSystem_16x16;
 

@@ -10,7 +10,7 @@ namespace Analogy.LogViewer.WindowsEventLogs.Managers
         private static readonly Lazy<UserSettingsManager> _instance =
             new Lazy<UserSettingsManager>(() => new UserSettingsManager());
         public static UserSettingsManager UserSettings { get; set; } = _instance.Value;
-        private string EventLogSettingFile { get; } = "WindowsEventLogs.Settings";
+        private string EventLogSettingFile { get; } = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Analogy.LogViewer", "AnalogyWindowsEventLogsSettings.json");
         public List<string> Logs { get; set; }
 
         public UserSettingsManager()

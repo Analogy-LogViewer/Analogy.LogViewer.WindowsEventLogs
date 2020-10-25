@@ -7,41 +7,39 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using Analogy.Interfaces;
+using Analogy.LogViewer.Template;
+using Analogy.LogViewer.WindowsEventLogs.Managers;
 
 namespace Analogy.LogViewer.WindowsEventLogs
 {
-    public class OfflineEventLogDataProvider : IAnalogyOfflineDataProvider
+    public class OfflineEventLogDataProvider : OfflineDataProvider
     {
-        public string OptionalTitle { get; set; } = "Windows Event Log Data Provider";
-        public Guid Id { get; set; } = new Guid("465F4963-71F3-4E50-8253-FA286BF5692B");
-        public Image LargeImage { get; set; } = null;
-        public Image SmallImage { get; set; } = null;
-        public bool UseCustomColors { get; set; } = false;
-        public IEnumerable<(string originalHeader, string replacementHeader)> GetReplacementHeaders()
+        public override string OptionalTitle { get; set; } = "Windows Event Log Data Provider";
+        public override Guid Id { get; set; } = new Guid("465F4963-71F3-4E50-8253-FA286BF5692B");
+        public override Image LargeImage { get; set; } = null;
+        public override Image SmallImage { get; set; } = null;
+        public override bool UseCustomColors { get; set; } = false;
+        public override IEnumerable<(string originalHeader, string replacementHeader)> GetReplacementHeaders()
             => Array.Empty<(string, string)>();
 
-        public (Color backgroundColor, Color foregroundColor) GetColorForMessage(IAnalogyLogMessage logMessage)
+        public override (Color backgroundColor, Color foregroundColor) GetColorForMessage(IAnalogyLogMessage logMessage)
             => (Color.Empty, Color.Empty);
-        public Task InitializeDataProviderAsync(IAnalogyLogger logger)
+        public override Task InitializeDataProviderAsync(IAnalogyLogger logger)
         {
-            return Task.CompletedTask;
+            LogManager.Instance.SetLogger(logger);
+            return base.InitializeDataProviderAsync(logger);
         }
 
-        public void MessageOpened(AnalogyLogMessage message)
-        {
-            //nop
-        }
+        public override bool CanSaveToLogFile { get; set; } = false;
+        public override string FileOpenDialogFilters { get; set; } = "Windows Event log files (*.evtx)|*.evtx";
+        public override string FileSaveDialogFilters { get; set; } = "";
+        public override IEnumerable<string> SupportFormats { get; set; } = new[] { "*.evtx" };
 
-        public bool CanSaveToLogFile { get; } = false;
-        public string FileOpenDialogFilters { get; } = "Windows Event log files (*.evtx)|*.evtx";
-        public string FileSaveDialogFilters { get; } = "";
-        public IEnumerable<string> SupportFormats { get; } = new[] { "*.evtx" };
-
-        public string InitialFolderFullPath { get; } =
+        public override string InitialFolderFullPath { get; set; } =
             Path.Combine(Environment.ExpandEnvironmentVariables("%SystemRoot%"), "System32", "Winevt", "Logs");
-        public bool DisableFilePoolingOption { get; } = false;
+        public override bool DisableFilePoolingOption { get; set; } = false;
 
-        public async Task<IEnumerable<AnalogyLogMessage>> Process(string fileName, CancellationToken token, ILogMessageCreatedHandler messagesHandler)
+        public override async Task<IEnumerable<AnalogyLogMessage>> Process(string fileName, CancellationToken token, ILogMessageCreatedHandler messagesHandler)
         {
             if (CanOpenFile(fileName))
             {
@@ -65,20 +63,10 @@ namespace Analogy.LogViewer.WindowsEventLogs
             return new List<AnalogyLogMessage>() { m };
         }
 
-        public IEnumerable<FileInfo> GetSupportedFiles(DirectoryInfo dirInfo, bool recursiveLoad)
-        {
-            return GetSupportedFilesInternal(dirInfo, recursiveLoad);
-        }
+        public override bool CanOpenFile(string fileName) => fileName.EndsWith(".evtx", StringComparison.InvariantCultureIgnoreCase);
+        public override bool CanOpenAllFiles(IEnumerable<string> fileNames) => fileNames.All(CanOpenFile);
 
-        public Task SaveAsync(List<AnalogyLogMessage> messages, string fileName)
-        {
-            throw new NotSupportedException("Saving is not supported for evtx files");
-        }
-
-        public bool CanOpenFile(string fileName) => fileName.EndsWith(".evtx", StringComparison.InvariantCultureIgnoreCase);
-        public bool CanOpenAllFiles(IEnumerable<string> fileNames) => fileNames.All(CanOpenFile);
-
-        private static List<FileInfo> GetSupportedFilesInternal(DirectoryInfo dirInfo, bool recursive)
+        protected override List<FileInfo> GetSupportedFilesInternal(DirectoryInfo dirInfo, bool recursive)
         {
             List<FileInfo> files = dirInfo.GetFiles("*.evtx").ToList();
             if (!recursive)

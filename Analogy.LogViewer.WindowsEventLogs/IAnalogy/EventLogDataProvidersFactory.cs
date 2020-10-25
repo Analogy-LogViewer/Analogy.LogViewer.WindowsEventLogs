@@ -6,15 +6,16 @@ using System.Threading;
 using System.Threading.Tasks;
 using Analogy.Interfaces;
 using Analogy.Interfaces.Factories;
+using Analogy.LogViewer.Template;
 
 namespace Analogy.LogViewer.WindowsEventLogs.IAnalogy
 {
-    public class EventLogDataProvidersFactory : IAnalogyDataProvidersFactory
+    public class EventLogDataProvidersFactory : DataProvidersFactory
     {
-        public Guid FactoryId { get; set; } = EventLogDataFactory.id;
-        public string Title { get; set; } = "Windows Event Log Data Provider";
+        public override Guid FactoryId { get; set; } = EventLogPrimaryFactory.id;
+        public override string Title { get; set; } = "Windows Event Log Data Provider";
 
-        public IEnumerable<IAnalogyDataProvider> DataProviders { get; }
+        public override IEnumerable<IAnalogyDataProvider> DataProviders { get; set; }
         public EventLogDataProvidersFactory()
         {
             DataProviders = new List<IAnalogyDataProvider>

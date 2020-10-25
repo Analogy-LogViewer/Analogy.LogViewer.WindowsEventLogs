@@ -10,7 +10,7 @@ using Analogy.LogViewer.Template;
 
 namespace Analogy.LogViewer.WindowsEventLogs.IAnalogy
 {
-    public class SerilogDownloadInformation : Analogy.LogViewer.Template.AnalogyDownloadInformation
+    public class DownloadInformation : Analogy.LogViewer.Template.AnalogyDownloadInformation
     {
         protected override string RepositoryURL { get; set; } = "https://api.github.com/repos/Analogy-LogViewer/Analogy.LogViewer.Analogy.LogViewer.WindowsEventLogs";
         public override TargetFrameworkAttribute CurrentFrameworkAttribute { get; set; } = (TargetFrameworkAttribute)Assembly.GetExecutingAssembly().GetCustomAttribute(typeof(TargetFrameworkAttribute));

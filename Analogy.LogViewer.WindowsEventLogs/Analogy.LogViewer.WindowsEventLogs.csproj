@@ -17,8 +17,10 @@
 		<PackageReleaseNotes>update API with interface assembly</PackageReleaseNotes>
 		<PackageIcon>AnalogyWindows.png</PackageIcon>
 		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-		<Version>1.3.7</Version>
+		<Version>1.3.8</Version>
 		<Company>Analogy.LogViewer</Company>
+		<Nullable>enable</Nullable>
+		<LangVersion>8.0</LangVersion>
 		<GenerateResourceUsePreserializedResources>true</GenerateResourceUsePreserializedResources>
 	</PropertyGroup>
 

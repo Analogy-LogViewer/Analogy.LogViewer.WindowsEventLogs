@@ -2,11 +2,13 @@
 
 	<PropertyGroup>
 		<OutputType>Library</OutputType>
-		<TargetFrameworks>net471;net472;netcoreapp3.1</TargetFrameworks>
+		<TargetFrameworks>net48;net471;net472;netcoreapp3.1</TargetFrameworks>
 		<UseWindowsForms>true</UseWindowsForms>
 		<PublishRepositoryUrl>true</PublishRepositoryUrl>
 		<IncludeSymbols>true</IncludeSymbols>
 		<SymbolPackageFormat>snupkg</SymbolPackageFormat>
+		<EmbedUntrackedSources>true</EmbedUntrackedSources>
+		<ContinuousIntegrationBuild>true</ContinuousIntegrationBuild>
 		<Authors>Lior Banai</Authors>
 		<Description>Extension for Analogy Log Viewer that shows Windows Event logs and read local *.Evtx files</Description>
 		<Copyright>Lior Banai @ 2020</Copyright>
@@ -17,7 +19,7 @@
 		<PackageReleaseNotes>update API with interface assembly</PackageReleaseNotes>
 		<PackageIcon>AnalogyWindows.png</PackageIcon>
 		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-		<Version>1.4.1</Version>
+		<Version>1.4.2</Version>
 		<Company>Analogy.LogViewer</Company>
 		<Nullable>enable</Nullable>
 		<LangVersion>8.0</LangVersion>
@@ -26,7 +28,7 @@
 
   <ItemGroup>
     <PackageReference Include="Analogy.LogViewer.Interfaces" Version="2.8.2.5" />
-    <PackageReference Include="Analogy.LogViewer.Template" Version="1.6.10.1" />
+    <PackageReference Include="Analogy.LogViewer.Template" Version="1.7.0" />
     <PackageReference Include="Microsoft.Build.Tasks.Git" Version="1.0.0">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>

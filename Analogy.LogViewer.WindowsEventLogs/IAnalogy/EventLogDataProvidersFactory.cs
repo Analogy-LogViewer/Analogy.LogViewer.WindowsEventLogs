@@ -5,6 +5,7 @@ using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
 using Analogy.Interfaces;
+using Analogy.Interfaces.DataTypes;
 using Analogy.Interfaces.Factories;
 using Analogy.LogViewer.Template;
 
@@ -36,11 +37,18 @@ namespace Analogy.LogViewer.WindowsEventLogs.IAnalogy
         public bool DisableFilePoolingOption { get; } = true;
         public string FileNamePath { get; set; }
 
+        public IEnumerable<string> HideColumns()
+        {
+            return new List<string>(0);
+        }
+
         public Guid Id { get; set; }
-        public Image LargeImage { get; set; } = null;
-        public Image SmallImage { get; set; } = null;
+        public Image? LargeImage { get; set; } = null;
+        public Image? SmallImage { get; set; } = null;
         public string OptionalTitle { get; set; }
         public bool UseCustomColors { get; set; } = false;
+        public AnalogyToolTip? ToolTip { get; set; }
+
         public IEnumerable<(string originalHeader, string replacementHeader)> GetReplacementHeaders()
             => Array.Empty<(string, string)>();
 

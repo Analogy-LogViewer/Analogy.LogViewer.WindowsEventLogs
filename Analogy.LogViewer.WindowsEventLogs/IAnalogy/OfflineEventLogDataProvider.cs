@@ -70,7 +70,10 @@ namespace Analogy.LogViewer.WindowsEventLogs
         {
             List<FileInfo> files = dirInfo.GetFiles("*.evtx").ToList();
             if (!recursive)
+            {
                 return files;
+            }
+
             try
             {
                 foreach (DirectoryInfo dir in dirInfo.GetDirectories())

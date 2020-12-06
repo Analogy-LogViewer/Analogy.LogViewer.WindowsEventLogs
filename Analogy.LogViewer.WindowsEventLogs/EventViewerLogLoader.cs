@@ -41,7 +41,10 @@ namespace Analogy.LogViewer.WindowsEventLogs
                         while ((record = reader.ReadEvent()) != null)
                         {
                             if (Token.IsCancellationRequested)
+                            {
                                 break;
+                            }
+
                             using (record)
                             {
                                 AnalogyLogMessage m = new AnalogyLogMessage

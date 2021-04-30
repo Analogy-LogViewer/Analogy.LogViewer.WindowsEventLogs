@@ -2,7 +2,7 @@
 
 	<PropertyGroup>
 		<OutputType>Library</OutputType>
-		<TargetFrameworks>net48;net471;net472;netcoreapp3.1</TargetFrameworks>
+		<TargetFrameworks>net5.0-windows;net48;net471;net472;netcoreapp3.1</TargetFrameworks>
 		<UseWindowsForms>true</UseWindowsForms>
 		<PublishRepositoryUrl>true</PublishRepositoryUrl>
 		<IncludeSymbols>true</IncludeSymbols>
@@ -19,7 +19,7 @@
 		<PackageReleaseNotes>update API with interface assembly</PackageReleaseNotes>
 		<PackageIcon>AnalogyWindows.png</PackageIcon>
 		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-		<Version>1.5.3</Version>
+		<Version>1.5.0</Version>
 		<Company>Analogy.LogViewer</Company>
 		<Nullable>enable</Nullable>
 		<LangVersion>8.0</LangVersion>
@@ -27,8 +27,8 @@
 	</PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Analogy.LogViewer.Interfaces" Version="2.12.5" />
-    <PackageReference Include="Analogy.LogViewer.Template" Version="1.8.3.2" />
+    <PackageReference Include="Analogy.LogViewer.Interfaces" Version="2.13.0" />
+    <PackageReference Include="Analogy.LogViewer.Template" Version="1.9.0" />
     <PackageReference Include="Microsoft.Build.Tasks.Git" Version="1.0.0">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
@@ -37,7 +37,7 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
   </ItemGroup>
 
 	<ItemGroup>

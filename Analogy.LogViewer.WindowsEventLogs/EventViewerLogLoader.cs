@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using Analogy.Interfaces;
+using Analogy.Interfaces.DataTypes;
 using Analogy.LogViewer.WindowsEventLogs.Managers;
 
 namespace Analogy.LogViewer.WindowsEventLogs
@@ -21,8 +22,7 @@ namespace Analogy.LogViewer.WindowsEventLogs
             Token = token;
         }
 
-        public async Task<IEnumerable<AnalogyLogMessage>> ReadFromFile(string fileName,
-            ILogMessageCreatedHandler logWindow)
+        public async Task<IEnumerable<AnalogyLogMessage>> ReadFromFile(string fileName, ILogMessageCreatedHandler messagesHandler)
         {
             if (!File.Exists(fileName))
             {
@@ -38,6 +38,7 @@ namespace Analogy.LogViewer.WindowsEventLogs
                     using (var reader = new EventLogReader(fileName, PathType.FilePath))
                     {
                         EventRecord record;
+                        long count = 0;
                         while ((record = reader.ReadEvent()) != null)
                         {
                             if (Token.IsCancellationRequested)
@@ -152,7 +153,9 @@ namespace Analogy.LogViewer.WindowsEventLogs
                                 }
 
                                 messages.Add(m);
-                                logWindow.AppendMessage(m, GetFileNameAsDataSource(fileName));
+                                messagesHandler.AppendMessage(m, GetFileNameAsDataSource(fileName));
+                                count++;
+                                messagesHandler.ReportFileReadProgress(new AnalogyFileReadProgress(AnalogyFileReadProgressType.Incremental, 1, count, count));
                             }
                         }
                     }
@@ -170,7 +173,7 @@ namespace Analogy.LogViewer.WindowsEventLogs
                     };
                     LogManager.Instance.LogException($"Error reading file:{e.Message}",e, nameof(ReadFromFile));
                     messages.Add(m);
-                    logWindow.AppendMessages(messages, GetFileNameAsDataSource(fileName));
+                    messagesHandler.AppendMessages(messages, GetFileNameAsDataSource(fileName));
                 }
 
                 if (!messages.Any())
@@ -178,7 +181,7 @@ namespace Analogy.LogViewer.WindowsEventLogs
                     AnalogyLogMessage empty = new AnalogyLogMessage($"File {fileName} is empty or corrupted",
                         AnalogyLogLevel.Error, AnalogyLogClass.General, "Analogy", "None");
                     messages.Add(empty);
-                    logWindow.AppendMessage(empty, GetFileNameAsDataSource(fileName));
+                    messagesHandler.AppendMessage(empty, GetFileNameAsDataSource(fileName));
                 }
 
                 return messages;

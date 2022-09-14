@@ -8,6 +8,7 @@ using Analogy.Interfaces;
 using Analogy.Interfaces.DataTypes;
 using Analogy.Interfaces.Factories;
 using Analogy.LogViewer.Template;
+using Analogy.LogViewer.Template.Managers;
 
 namespace Analogy.LogViewer.WindowsEventLogs.IAnalogy
 {
@@ -61,8 +62,9 @@ namespace Analogy.LogViewer.WindowsEventLogs.IAnalogy
             Id = id;
             OptionalTitle = Path.GetFileName(FileNamePath);
         }
-        public Task InitializeDataProviderAsync(IAnalogyLogger logger)
+        public Task InitializeDataProvider(IAnalogyLogger logger)
         {
+            LogManager.Instance.SetLogger(logger);
             return Task.CompletedTask;
         }
 

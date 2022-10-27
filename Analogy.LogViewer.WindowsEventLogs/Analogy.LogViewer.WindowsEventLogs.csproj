@@ -19,7 +19,7 @@
 		<PackageReleaseNotes>update API with interface assembly</PackageReleaseNotes>
 		<PackageIcon>AnalogyWindows.png</PackageIcon>
 		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-		<Version>2.3.0</Version>
+		<Version>3.4.0</Version>
 		<Company>Analogy.LogViewer</Company>
 		<Nullable>enable</Nullable>
 		<LangVersion>8.0</LangVersion>

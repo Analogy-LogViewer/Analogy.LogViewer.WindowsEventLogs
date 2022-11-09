@@ -8,6 +8,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Analogy.Interfaces;
 using Analogy.Interfaces.DataTypes;
+using Analogy.LogViewer.Template.Managers;
 using Analogy.LogViewer.WindowsEventLogs.Managers;
 
 namespace Analogy.LogViewer.WindowsEventLogs

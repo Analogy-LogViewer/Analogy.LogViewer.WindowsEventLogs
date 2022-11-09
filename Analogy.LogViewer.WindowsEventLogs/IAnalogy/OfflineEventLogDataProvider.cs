@@ -8,6 +8,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Analogy.Interfaces;
 using Analogy.LogViewer.Template;
+using Analogy.LogViewer.Template.Managers;
 using Analogy.LogViewer.WindowsEventLogs.Managers;
 
 namespace Analogy.LogViewer.WindowsEventLogs
@@ -26,7 +27,6 @@ namespace Analogy.LogViewer.WindowsEventLogs
             => (Color.Empty, Color.Empty);
         public override Task InitializeDataProvider(IAnalogyLogger logger)
         {
-            LogManager.Instance.SetLogger(logger);
             return base.InitializeDataProvider(logger);
         }
 

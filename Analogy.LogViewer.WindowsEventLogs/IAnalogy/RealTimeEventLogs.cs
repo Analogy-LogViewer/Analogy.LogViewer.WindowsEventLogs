@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Analogy.Interfaces;
 using Analogy.LogViewer.Template;
+using Analogy.LogViewer.Template.Managers;
 using Analogy.LogViewer.WindowsEventLogs.Managers;
 
 
@@ -17,12 +18,13 @@ namespace Analogy.LogViewer.WindowsEventLogs
     {
         private List<EventLog> Logs = new List<EventLog>();
         public override Guid Id { get; set; } = new Guid("407C8AD7-E7A3-4B36-9221-BB5D48E78766");
-        public override  Image ConnectedLargeImage { get; set; } = null;
-        public override  Image ConnectedSmallImage { get; set; } = null;
-        public override  Image DisconnectedLargeImage { get; set; } = null;
+        public override Image ConnectedLargeImage { get; set; } = null;
+        public override Image ConnectedSmallImage { get; set; } = null;
+        public override Image DisconnectedLargeImage { get; set; } = null;
         public override Image DisconnectedSmallImage { get; set; } = null;
         public override string OptionalTitle { get; set; } = "Real Time Windows Event logs";
         public override Task<bool> CanStartReceiving() => Task.FromResult(true);
+
         public override IAnalogyOfflineDataProvider FileOperationsHandler { get; set; } = null;
         public override bool UseCustomColors { get; set; } = false;
         public override IEnumerable<(string originalHeader, string replacementHeader)> GetReplacementHeaders()
@@ -32,7 +34,6 @@ namespace Analogy.LogViewer.WindowsEventLogs
             => (Color.Empty, Color.Empty);
         public override Task InitializeDataProvider(IAnalogyLogger logger)
         {
-            LogManager.Instance.SetLogger(logger);
             return base.InitializeDataProvider(logger);
         }
 
@@ -53,7 +54,7 @@ namespace Analogy.LogViewer.WindowsEventLogs
 
         public override Task StopReceiving() => Task.CompletedTask;
 
-
+        public override Task ShutDown() => Task.CompletedTask;
 
         private void SetupLogs()
         {
@@ -81,7 +82,7 @@ namespace Analogy.LogViewer.WindowsEventLogs
 
                             AnalogyLogMessage m = CreateMessageFromEvent(arg.Entry);
                             m.Module = logName;
-                            MessageReady(this,new AnalogyLogMessageArgs(m, Environment.MachineName, "Windows Event Logs", Id));
+                            MessageReady(this, new AnalogyLogMessageArgs(m, Environment.MachineName, "Windows Event Logs", Id));
                         };
 
                         eventLog.EnableRaisingEvents = true;
@@ -93,7 +94,7 @@ namespace Analogy.LogViewer.WindowsEventLogs
                     MessageBox.Show(m, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     AnalogyLogMessage l = new AnalogyLogMessage(m, AnalogyLogLevel.Error, AnalogyLogClass.General, "Analogy", "None");
                     MessageReady(this, new AnalogyLogMessageArgs(l, Environment.MachineName, "Windows Event Logs", Id));
-                    LogManager.Instance.LogException($"Error reading event log: {e.Message}",e, "Windows Event Logs");
+                    LogManager.Instance.LogException($"Error reading event log: {e.Message}", e, "Windows Event Logs");
                 }
             }
         }

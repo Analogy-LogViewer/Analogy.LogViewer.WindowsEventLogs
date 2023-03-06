@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Analogy.Interfaces;
@@ -37,6 +38,8 @@ namespace Analogy.LogViewer.WindowsEventLogs.IAnalogy
     {
         public bool DisableFilePoolingOption { get; } = true;
         public string FileNamePath { get; set; }
+        public event EventHandler<AnalogyStartedProcessingArgs>? ProcessingStarted;
+        public event EventHandler<AnalogyEndProcessingArgs>? ProcessingFinished;
 
         public IEnumerable<string> HideColumns()
         {
@@ -68,15 +71,18 @@ namespace Analogy.LogViewer.WindowsEventLogs.IAnalogy
             return Task.CompletedTask;
         }
 
-        public void MessageOpened(AnalogyLogMessage message)
+        public void MessageOpened(IAnalogyLogMessage message)
         {
             //nop
         }
 
-        public async Task<IEnumerable<AnalogyLogMessage>> Process(CancellationToken token, ILogMessageCreatedHandler messagesHandler)
+        public async Task<IEnumerable<IAnalogyLogMessage>> Process(CancellationToken token, ILogMessageCreatedHandler messagesHandler)
         {
+            DateTime now = DateTime.Now;
+            ProcessingStarted?.Invoke(this,new AnalogyStartedProcessingArgs());
             EventViewerLogLoader logLoader = new EventViewerLogLoader(token);
             var messages = await logLoader.ReadFromFile(FileNamePath, messagesHandler).ConfigureAwait(false);
+            ProcessingFinished?.Invoke(this, new AnalogyEndProcessingArgs(now,DateTime.Now,"",messages.Count()));
             return messages;
         }
     }

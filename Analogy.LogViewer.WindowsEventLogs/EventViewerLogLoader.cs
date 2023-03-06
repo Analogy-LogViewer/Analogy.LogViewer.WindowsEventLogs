@@ -23,7 +23,7 @@ namespace Analogy.LogViewer.WindowsEventLogs
             Token = token;
         }
 
-        public async Task<IEnumerable<AnalogyLogMessage>> ReadFromFile(string fileName, ILogMessageCreatedHandler messagesHandler)
+        public async Task<IEnumerable<IAnalogyLogMessage>> ReadFromFile(string fileName, ILogMessageCreatedHandler messagesHandler)
         {
             if (!File.Exists(fileName))
             {
@@ -31,7 +31,7 @@ namespace Analogy.LogViewer.WindowsEventLogs
                 return new List<AnalogyLogMessage>();
             }
 
-            List<AnalogyLogMessage> messages = new List<AnalogyLogMessage>();
+            List<IAnalogyLogMessage> messages = new List<IAnalogyLogMessage>();
             return await Task.Factory.StartNew(() =>
             {
                 try
@@ -96,9 +96,7 @@ namespace Analogy.LogViewer.WindowsEventLogs
                                         .Split(_separators, StringSplitOptions.RemoveEmptyEntries);
                                     if (items.Any() && items.Length == 4)
                                     {
-                                        m.Text =
-                                            $"{record.MachineName} :({record.LogName}) - {items[3]} . Message ID: {items[2]}";
-                                        m.Category = items[1];
+                                        m.Text = $"{record.MachineName} :({record.LogName}) - {items[3]} . Message ID: {items[2]}";
                                         switch (items[0])
                                         {
                                             case "Informational":

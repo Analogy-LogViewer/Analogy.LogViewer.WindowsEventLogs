@@ -39,12 +39,15 @@ namespace Analogy.LogViewer.WindowsEventLogs
             Path.Combine(Environment.ExpandEnvironmentVariables("%SystemRoot%"), "System32", "Winevt", "Logs");
         public override bool DisableFilePoolingOption { get; set; } = false;
 
-        public override async Task<IEnumerable<AnalogyLogMessage>> Process(string fileName, CancellationToken token, ILogMessageCreatedHandler messagesHandler)
+        public override async Task<IEnumerable<IAnalogyLogMessage>> Process(string fileName, CancellationToken token, ILogMessageCreatedHandler messagesHandler)
         {
             if (CanOpenFile(fileName))
             {
+                DateTime now = DateTime.Now;
+                RaiseProcessingStarted(new AnalogyStartedProcessingArgs());
                 EventViewerLogLoader logLoader = new EventViewerLogLoader(token);
                 var messages = await logLoader.ReadFromFile(fileName, messagesHandler).ConfigureAwait(false);
+                RaiseProcessingFinished(new AnalogyEndProcessingArgs(now,DateTime.Now,"",messages.Count()));
                 return messages;
             }
 

@@ -142,7 +142,6 @@ namespace Analogy.LogViewer.WindowsEventLogs
                     break;
             }
 
-            m.Category = eEntry.Category;
             m.Date = eEntry.TimeGenerated;
             m.Id = Guid.NewGuid();
             m.Source = eEntry.Source;

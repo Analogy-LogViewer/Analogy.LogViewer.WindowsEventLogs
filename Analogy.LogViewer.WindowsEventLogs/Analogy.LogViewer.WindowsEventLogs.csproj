@@ -16,10 +16,10 @@
 		<PackageProjectUrl>https://github.com/Analogy-LogViewer/Analogy.LogViewer.WindowsEventLogs</PackageProjectUrl>
 		<RepositoryUrl>https://github.com/Analogy-LogViewer/Analogy.LogViewer.WindowsEventLogs</RepositoryUrl>
 		<RepositoryType>git</RepositoryType>
-		<PackageReleaseNotes>update API with interface assembly</PackageReleaseNotes>
+		<PackageReleaseNotes>update API</PackageReleaseNotes>
 		<PackageIcon>AnalogyWindows.png</PackageIcon>
 		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-		<Version>3.8.0</Version>
+		<Version>3.8.2</Version>
 		<Company>Analogy.LogViewer</Company>
 		<Nullable>enable</Nullable>
 		<LangVersion>latest</LangVersion>
@@ -28,7 +28,7 @@
 
   <ItemGroup>
 	<PackageReference Include="Analogy.LogViewer.Interfaces" Version="3.8.0" />
-	<PackageReference Include="Analogy.LogViewer.Template" Version="3.8.0" />
+	<PackageReference Include="Analogy.LogViewer.Template" Version="3.8.2" />
 	<PackageReference Include="Microsoft.Build.Tasks.Git" Version="1.1.1">
 	  <PrivateAssets>all</PrivateAssets>
 	  <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
@@ -37,7 +37,7 @@
 	  <PrivateAssets>all</PrivateAssets>
 	  <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 	</PackageReference>
-	<PackageReference Include="Newtonsoft.Json" Version="13.0.2" />
+	<PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
   </ItemGroup>
 	<ItemGroup Condition=" '$(TargetFramework)' == 'net48' or '$(TargetFramework)' == 'net471' ">
 		<PackageReference Include="PolySharp" Version="1.12.1">

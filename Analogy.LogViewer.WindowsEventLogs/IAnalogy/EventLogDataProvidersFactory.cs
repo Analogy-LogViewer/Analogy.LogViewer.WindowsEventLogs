@@ -41,10 +41,9 @@ namespace Analogy.LogViewer.WindowsEventLogs.IAnalogy
         public event EventHandler<AnalogyStartedProcessingArgs>? ProcessingStarted;
         public event EventHandler<AnalogyEndProcessingArgs>? ProcessingFinished;
 
-        public IEnumerable<string> HideColumns()
-        {
-            return new List<string>(0);
-        }
+        public virtual IEnumerable<AnalogyLogMessagePropertyName> HideExistingColumns() => Enumerable.Empty<AnalogyLogMessagePropertyName>();
+
+        public virtual IEnumerable<string> HideAdditionalColumns() => Enumerable.Empty<string>();
 
         public Guid Id { get; set; }
         public Image? LargeImage { get; set; } = null;

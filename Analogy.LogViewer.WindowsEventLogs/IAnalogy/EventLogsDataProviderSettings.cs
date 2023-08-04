@@ -5,6 +5,7 @@ using System.Windows.Forms;
 using Analogy.Interfaces;
 using Analogy.LogViewer.Template;
 using Analogy.LogViewer.WindowsEventLogs.Managers;
+using Microsoft.Extensions.Logging;
 
 namespace Analogy.LogViewer.WindowsEventLogs.IAnalogy
 {
@@ -17,7 +18,7 @@ namespace Analogy.LogViewer.WindowsEventLogs.IAnalogy
         public override Guid FactoryId { get; set; } = EventLogPrimaryFactory.id;
         public override Guid Id { get; set; } = new Guid("61774F7C-4F62-4A61-AD24-FC8263DF518A");
 
-        public override void CreateUserControl(IAnalogyLogger logger)
+        public override void CreateUserControl(ILogger logger)
         {
             DataProviderSettings = new EventLogsSettings();
         }

@@ -10,6 +10,7 @@ using Analogy.Interfaces.DataTypes;
 using Analogy.Interfaces.Factories;
 using Analogy.LogViewer.Template;
 using Analogy.LogViewer.Template.Managers;
+using Microsoft.Extensions.Logging;
 
 namespace Analogy.LogViewer.WindowsEventLogs.IAnalogy
 {
@@ -46,10 +47,10 @@ namespace Analogy.LogViewer.WindowsEventLogs.IAnalogy
         public virtual IEnumerable<string> HideAdditionalColumns() => Enumerable.Empty<string>();
 
         public Guid Id { get; set; }
-        public Image? LargeImage { get; set; } = null;
-        public Image? SmallImage { get; set; } = null;
+        public Image? LargeImage { get; set; }
+        public Image? SmallImage { get; set; }
         public string OptionalTitle { get; set; }
-        public bool UseCustomColors { get; set; } = false;
+        public bool UseCustomColors { get; set; }
         public AnalogyToolTip? ToolTip { get; set; }
 
         public IEnumerable<(string originalHeader, string replacementHeader)> GetReplacementHeaders()
@@ -64,7 +65,7 @@ namespace Analogy.LogViewer.WindowsEventLogs.IAnalogy
             Id = id;
             OptionalTitle = Path.GetFileName(FileNamePath);
         }
-        public Task InitializeDataProvider(IAnalogyLogger logger)
+        public Task InitializeDataProvider(ILogger logger)
         {
             LogManager.Instance.SetLogger(logger);
             return Task.CompletedTask;

@@ -10,6 +10,7 @@ using Analogy.Interfaces;
 using Analogy.Interfaces.DataTypes;
 using Analogy.LogViewer.Template.Managers;
 using Analogy.LogViewer.WindowsEventLogs.Managers;
+using Microsoft.Extensions.Logging;
 
 namespace Analogy.LogViewer.WindowsEventLogs
 {
@@ -170,7 +171,7 @@ namespace Analogy.LogViewer.WindowsEventLogs
                         Class = AnalogyLogClass.General,
                         Source = "Analogy"
                     };
-                    LogManager.Instance.LogException($"Error reading file:{e.Message}",e, nameof(ReadFromFile));
+                    LogManager.Instance.LogError(e, $"Error reading file:{e.Message}",e, nameof(ReadFromFile));
                     messages.Add(m);
                     messagesHandler.AppendMessages(messages, GetFileNameAsDataSource(fileName));
                 }

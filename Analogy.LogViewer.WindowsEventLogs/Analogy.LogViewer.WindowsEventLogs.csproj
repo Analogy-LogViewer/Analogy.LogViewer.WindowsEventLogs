@@ -19,7 +19,8 @@
 		<PackageReleaseNotes>update API</PackageReleaseNotes>
 		<PackageIcon>AnalogyWindows.png</PackageIcon>
 		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-		<Version>3.8.3</Version>
+		<VersionPrefix>5.0.0.0</VersionPrefix>
+		<VersionSuffix></VersionSuffix>
 		<Company>Analogy.LogViewer</Company>
 		<Nullable>enable</Nullable>
 		<LangVersion>latest</LangVersion>
@@ -27,8 +28,8 @@
 	</PropertyGroup>
 
   <ItemGroup>
-	<PackageReference Include="Analogy.LogViewer.Interfaces" Version="3.8.3" />
-	<PackageReference Include="Analogy.LogViewer.Template" Version="3.8.3" />
+	<PackageReference Include="Analogy.LogViewer.Interfaces" Version="5.0.0" />
+	<PackageReference Include="Analogy.LogViewer.Template" Version="5.0.0" />
 	<PackageReference Include="Microsoft.Build.Tasks.Git" Version="1.1.1">
 	  <PrivateAssets>all</PrivateAssets>
 	  <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>

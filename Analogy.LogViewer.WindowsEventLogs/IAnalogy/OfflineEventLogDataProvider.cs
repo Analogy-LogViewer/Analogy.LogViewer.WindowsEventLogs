@@ -10,6 +10,7 @@ using Analogy.Interfaces;
 using Analogy.LogViewer.Template;
 using Analogy.LogViewer.Template.Managers;
 using Analogy.LogViewer.WindowsEventLogs.Managers;
+using Microsoft.Extensions.Logging;
 
 namespace Analogy.LogViewer.WindowsEventLogs
 {
@@ -17,27 +18,27 @@ namespace Analogy.LogViewer.WindowsEventLogs
     {
         public override string OptionalTitle { get; set; } = "Windows Event Log Data Provider";
         public override Guid Id { get; set; } = new Guid("465F4963-71F3-4E50-8253-FA286BF5692B");
-        public override Image LargeImage { get; set; } = null;
-        public override Image SmallImage { get; set; } = null;
-        public override bool UseCustomColors { get; set; } = false;
+        public override Image LargeImage { get; set; }
+        public override Image SmallImage { get; set; }
+        public override bool UseCustomColors { get; set; }
         public override IEnumerable<(string originalHeader, string replacementHeader)> GetReplacementHeaders()
             => Array.Empty<(string, string)>();
 
         public override (Color backgroundColor, Color foregroundColor) GetColorForMessage(IAnalogyLogMessage logMessage)
             => (Color.Empty, Color.Empty);
-        public override Task InitializeDataProvider(IAnalogyLogger logger)
+        public override Task InitializeDataProvider(ILogger logger)
         {
             return base.InitializeDataProvider(logger);
         }
 
-        public override bool CanSaveToLogFile { get; set; } = false;
+        public override bool CanSaveToLogFile { get; set; }
         public override string FileOpenDialogFilters { get; set; } = "Windows Event log files (*.evtx)|*.evtx";
         public override string FileSaveDialogFilters { get; set; } = "";
         public override IEnumerable<string> SupportFormats { get; set; } = new[] { "*.evtx" };
 
         public override string InitialFolderFullPath { get; set; } =
             Path.Combine(Environment.ExpandEnvironmentVariables("%SystemRoot%"), "System32", "Winevt", "Logs");
-        public override bool DisableFilePoolingOption { get; set; } = false;
+        public override bool DisableFilePoolingOption { get; set; }
 
         public override async Task<IEnumerable<IAnalogyLogMessage>> Process(string fileName, CancellationToken token, ILogMessageCreatedHandler messagesHandler)
         {

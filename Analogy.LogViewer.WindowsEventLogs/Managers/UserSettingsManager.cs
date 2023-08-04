@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using Analogy.LogViewer.Template.Managers;
+using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 
 namespace Analogy.LogViewer.WindowsEventLogs.Managers
@@ -26,7 +27,7 @@ namespace Analogy.LogViewer.WindowsEventLogs.Managers
                 }
                 catch (Exception ex)
                 {
-                    LogManager.Instance.LogCritical("", $"Unable to read file {EventLogSettingFile}: {ex}");
+                    LogManager.Instance.LogCritical(ex, $"Unable to read file {EventLogSettingFile}: {ex}");
                 }
             }
         }

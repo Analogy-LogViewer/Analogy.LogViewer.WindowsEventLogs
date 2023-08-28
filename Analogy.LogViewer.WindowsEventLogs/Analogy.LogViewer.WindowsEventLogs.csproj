@@ -19,7 +19,7 @@
 		<PackageReleaseNotes>update API</PackageReleaseNotes>
 		<PackageIcon>AnalogyWindows.png</PackageIcon>
 		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-		<VersionPrefix>5.0.0.0</VersionPrefix>
+		<VersionPrefix>5.0.1</VersionPrefix>
 		<VersionSuffix></VersionSuffix>
 		<Company>Analogy.LogViewer</Company>
 		<Nullable>enable</Nullable>

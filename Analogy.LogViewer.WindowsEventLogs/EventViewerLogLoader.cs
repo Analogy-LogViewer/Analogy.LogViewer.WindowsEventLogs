@@ -1,4 +1,9 @@
-﻿using System;
+﻿using Analogy.Interfaces;
+using Analogy.Interfaces.DataTypes;
+using Analogy.LogViewer.Template.Managers;
+using Analogy.LogViewer.WindowsEventLogs.Managers;
+using Microsoft.Extensions.Logging;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics.Eventing.Reader;
 using System.IO;
@@ -6,17 +11,12 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using Analogy.Interfaces;
-using Analogy.Interfaces.DataTypes;
-using Analogy.LogViewer.Template.Managers;
-using Analogy.LogViewer.WindowsEventLogs.Managers;
-using Microsoft.Extensions.Logging;
 
 namespace Analogy.LogViewer.WindowsEventLogs
 {
     public class EventViewerLogLoader
     {
-        private readonly string[] _separators = {"Severity: ", ", Category: ", ", MessageID: ", ", Message: "};
+        private readonly string[] _separators = { "Severity: ", ", Category: ", ", MessageID: ", ", Message: " };
         private CancellationToken Token { get; }
 
         public EventViewerLogLoader(CancellationToken token)
@@ -58,10 +58,10 @@ namespace Analogy.LogViewer.WindowsEventLogs
                                     Level = AnalogyLogLevel.Information,
                                     Id = record.ActivityId ?? Guid.Empty,
                                     ProcessId = record.ProcessId ?? 0,
-                                    MachineName= record.MachineName,
-                                    ThreadId =record.ThreadId??0,
+                                    MachineName = record.MachineName,
+                                    ThreadId = record.ThreadId ?? 0,
                                     FileName = fileName,
-                                    User = record.UserId?.Value
+                                    User = record.UserId?.Value,
                                 };
                                 string properties = string.Join(Environment.NewLine,
                                     record.Properties.Select(p => p.Value));
@@ -148,7 +148,6 @@ namespace Analogy.LogViewer.WindowsEventLogs
                                                     break;
                                             }
                                         }
-
                                     }
                                 }
 
@@ -159,7 +158,6 @@ namespace Analogy.LogViewer.WindowsEventLogs
                             }
                         }
                     }
-
                 }
                 catch (Exception e)
                 {
@@ -169,9 +167,9 @@ namespace Analogy.LogViewer.WindowsEventLogs
                         Text = fail,
                         Level = AnalogyLogLevel.Critical,
                         Class = AnalogyLogClass.General,
-                        Source = "Analogy"
+                        Source = "Analogy",
                     };
-                    LogManager.Instance.LogError(e, $"Error reading file:{e.Message}",e, nameof(ReadFromFile));
+                    LogManager.Instance.LogError(e, $"Error reading file:{e.Message}", e, nameof(ReadFromFile));
                     messages.Add(m);
                     messagesHandler.AppendMessages(messages, GetFileNameAsDataSource(fileName));
                 }
@@ -192,7 +190,6 @@ namespace Analogy.LogViewer.WindowsEventLogs
         {
             string file = Path.GetFileName(fileName);
             return fileName != null && fileName.Equals(file) ? fileName : $"{file} ({fileName})";
-
         }
     }
 }

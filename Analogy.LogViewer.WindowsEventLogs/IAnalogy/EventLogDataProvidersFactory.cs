@@ -1,16 +1,16 @@
-﻿using System;
+﻿using Analogy.Interfaces;
+using Analogy.Interfaces.DataTypes;
+using Analogy.Interfaces.Factories;
+using Analogy.LogViewer.Template;
+using Analogy.LogViewer.Template.Managers;
+using Microsoft.Extensions.Logging;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using Analogy.Interfaces;
-using Analogy.Interfaces.DataTypes;
-using Analogy.Interfaces.Factories;
-using Analogy.LogViewer.Template;
-using Analogy.LogViewer.Template.Managers;
-using Microsoft.Extensions.Logging;
 
 namespace Analogy.LogViewer.WindowsEventLogs.IAnalogy
 {
@@ -26,11 +26,10 @@ namespace Analogy.LogViewer.WindowsEventLogs.IAnalogy
             {
                 new RealTimeEventLogs(),
                 new OfflineEventLogDataProvider(),
-                new WindowsEventLogFile(Path.Combine(Environment.ExpandEnvironmentVariables("%SystemRoot%"), "System32", "Winevt", "Logs", "System.evtx"),new Guid("17C93A69-2D7D-4620-9289-6889DE4EFC79")),
-                new WindowsEventLogFile(Path.Combine(Environment.ExpandEnvironmentVariables("%SystemRoot%"), "System32", "Winevt", "Logs", "Application.evtx"),new Guid("27C93A69-2D7D-4620-9289-6889DE4EFC80")),
-                new WindowsEventLogFile(Path.Combine(Environment.ExpandEnvironmentVariables("%SystemRoot%"), "System32", "Winevt", "Logs", "Security.evtx"),new Guid("37C93A69-2D7D-4620-9289-6889DE4EFC80")),
-                new WindowsEventLogFile(Path.Combine(Environment.ExpandEnvironmentVariables("%SystemRoot%"), "System32", "Winevt", "Logs", "Setup.evtx"),new Guid("47C93A69-2D7D-4620-9289-6889DE4EFC80")),
-
+                new WindowsEventLogFile(Path.Combine(Environment.ExpandEnvironmentVariables("%SystemRoot%"), "System32", "Winevt", "Logs", "System.evtx"), new Guid("17C93A69-2D7D-4620-9289-6889DE4EFC79")),
+                new WindowsEventLogFile(Path.Combine(Environment.ExpandEnvironmentVariables("%SystemRoot%"), "System32", "Winevt", "Logs", "Application.evtx"), new Guid("27C93A69-2D7D-4620-9289-6889DE4EFC80")),
+                new WindowsEventLogFile(Path.Combine(Environment.ExpandEnvironmentVariables("%SystemRoot%"), "System32", "Winevt", "Logs", "Security.evtx"), new Guid("37C93A69-2D7D-4620-9289-6889DE4EFC80")),
+                new WindowsEventLogFile(Path.Combine(Environment.ExpandEnvironmentVariables("%SystemRoot%"), "System32", "Winevt", "Logs", "Setup.evtx"), new Guid("47C93A69-2D7D-4620-9289-6889DE4EFC80")),
             };
         }
     }
@@ -53,14 +52,13 @@ namespace Analogy.LogViewer.WindowsEventLogs.IAnalogy
         public bool UseCustomColors { get; set; }
         public AnalogyToolTip? ToolTip { get; set; }
 
-        public IEnumerable<(string originalHeader, string replacementHeader)> GetReplacementHeaders()
+        public IEnumerable<(string OriginalHeader, string ReplacementHeader)> GetReplacementHeaders()
             => Array.Empty<(string, string)>();
 
-        public (Color backgroundColor, Color foregroundColor) GetColorForMessage(IAnalogyLogMessage logMessage)
+        public (Color BackgroundColor, Color ForegroundColor) GetColorForMessage(IAnalogyLogMessage logMessage)
             => (Color.Empty, Color.Empty);
         public WindowsEventLogFile(string fileNamePath, Guid id)
         {
-
             FileNamePath = fileNamePath;
             Id = id;
             OptionalTitle = Path.GetFileName(FileNamePath);
@@ -79,12 +77,11 @@ namespace Analogy.LogViewer.WindowsEventLogs.IAnalogy
         public async Task<IEnumerable<IAnalogyLogMessage>> Process(CancellationToken token, ILogMessageCreatedHandler messagesHandler)
         {
             DateTime now = DateTime.Now;
-            ProcessingStarted?.Invoke(this,new AnalogyStartedProcessingArgs());
+            ProcessingStarted?.Invoke(this, new AnalogyStartedProcessingArgs());
             EventViewerLogLoader logLoader = new EventViewerLogLoader(token);
             var messages = await logLoader.ReadFromFile(FileNamePath, messagesHandler).ConfigureAwait(false);
-            ProcessingFinished?.Invoke(this, new AnalogyEndProcessingArgs(now,DateTime.Now,"",messages.Count()));
+            ProcessingFinished?.Invoke(this, new AnalogyEndProcessingArgs(now, DateTime.Now, "", messages.Count()));
             return messages;
         }
     }
-
 }

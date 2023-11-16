@@ -1,4 +1,9 @@
-﻿using System;
+﻿using Analogy.Interfaces;
+using Analogy.LogViewer.Template;
+using Analogy.LogViewer.Template.Managers;
+using Analogy.LogViewer.WindowsEventLogs.Managers;
+using Microsoft.Extensions.Logging;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
@@ -6,11 +11,6 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using Analogy.Interfaces;
-using Analogy.LogViewer.Template;
-using Analogy.LogViewer.Template.Managers;
-using Analogy.LogViewer.WindowsEventLogs.Managers;
-using Microsoft.Extensions.Logging;
 
 namespace Analogy.LogViewer.WindowsEventLogs
 {
@@ -21,10 +21,10 @@ namespace Analogy.LogViewer.WindowsEventLogs
         public override Image LargeImage { get; set; }
         public override Image SmallImage { get; set; }
         public override bool UseCustomColors { get; set; }
-        public override IEnumerable<(string originalHeader, string replacementHeader)> GetReplacementHeaders()
+        public override IEnumerable<(string OriginalHeader, string ReplacementHeader)> GetReplacementHeaders()
             => Array.Empty<(string, string)>();
 
-        public override (Color backgroundColor, Color foregroundColor) GetColorForMessage(IAnalogyLogMessage logMessage)
+        public override (Color BackgroundColor, Color ForegroundColor) GetColorForMessage(IAnalogyLogMessage logMessage)
             => (Color.Empty, Color.Empty);
         public override Task InitializeDataProvider(ILogger logger)
         {
@@ -48,7 +48,7 @@ namespace Analogy.LogViewer.WindowsEventLogs
                 RaiseProcessingStarted(new AnalogyStartedProcessingArgs());
                 EventViewerLogLoader logLoader = new EventViewerLogLoader(token);
                 var messages = await logLoader.ReadFromFile(fileName, messagesHandler).ConfigureAwait(false);
-                RaiseProcessingFinished(new AnalogyEndProcessingArgs(now,DateTime.Now,"",messages.Count()));
+                RaiseProcessingFinished(new AnalogyEndProcessingArgs(now, DateTime.Now, "", messages.Count()));
                 return messages;
             }
 
@@ -61,7 +61,7 @@ namespace Analogy.LogViewer.WindowsEventLogs
                 ProcessId = System.Diagnostics.Process.GetCurrentProcess().Id,
                 Class = AnalogyLogClass.General,
                 User = Environment.UserName,
-                Date = DateTime.Now
+                Date = DateTime.Now,
             };
             messagesHandler.AppendMessage(m, Environment.MachineName);
             return new List<AnalogyLogMessage>() { m };
@@ -92,6 +92,5 @@ namespace Analogy.LogViewer.WindowsEventLogs
 
             return files;
         }
-
     }
 }

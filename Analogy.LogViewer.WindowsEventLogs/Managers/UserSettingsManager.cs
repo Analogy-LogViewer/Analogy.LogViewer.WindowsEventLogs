@@ -1,9 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using Analogy.LogViewer.Template.Managers;
+﻿using Analogy.LogViewer.Template.Managers;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
+using System;
+using System.Collections.Generic;
+using System.IO;
 
 namespace Analogy.LogViewer.WindowsEventLogs.Managers
 {
@@ -41,7 +41,6 @@ namespace Analogy.LogViewer.WindowsEventLogs.Managers
             catch (Exception ex)
             {
                 LogManager.Instance.LogCritical("", $"Unable to save file {EventLogSettingFile}: {ex}");
-
             }
         }
     }

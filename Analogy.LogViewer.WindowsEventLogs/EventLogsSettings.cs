@@ -1,10 +1,10 @@
-﻿using System;
+﻿using Analogy.LogViewer.WindowsEventLogs.Managers;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
-using Analogy.LogViewer.WindowsEventLogs.Managers;
 
 namespace Analogy.LogViewer.WindowsEventLogs
 {

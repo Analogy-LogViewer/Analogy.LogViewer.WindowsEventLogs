@@ -1,10 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Drawing;
-using Analogy.Interfaces;
+﻿using Analogy.Interfaces;
 using Analogy.Interfaces.Factories;
 using Analogy.LogViewer.Template;
 using Analogy.LogViewer.WindowsEventLogs.Properties;
+using System;
+using System.Collections.Generic;
+using System.Drawing;
 
 namespace Analogy.LogViewer.WindowsEventLogs.IAnalogy
 {
@@ -19,6 +19,5 @@ namespace Analogy.LogViewer.WindowsEventLogs.IAnalogy
         public override string About { get; set; } = "Windows Event Log Data Provider";
         public override Image LargeImage { get; set; } = Resources.OperatingSystem_32x32;
         public override Image SmallImage { get; set; } = Resources.OperatingSystem_16x16;
-
     }
 }

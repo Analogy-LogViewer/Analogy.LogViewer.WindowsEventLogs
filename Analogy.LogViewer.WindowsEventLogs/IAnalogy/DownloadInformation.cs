@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Analogy.LogViewer.Template;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -6,7 +7,6 @@ using System.Reflection;
 using System.Runtime.Versioning;
 using System.Text;
 using System.Threading.Tasks;
-using Analogy.LogViewer.Template;
 
 namespace Analogy.LogViewer.WindowsEventLogs.IAnalogy
 {

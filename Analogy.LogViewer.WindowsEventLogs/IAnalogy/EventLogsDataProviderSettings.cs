@@ -1,17 +1,16 @@
-﻿using System;
-using System.Drawing;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using Analogy.Interfaces;
+﻿using Analogy.Interfaces;
 using Analogy.LogViewer.Template;
 using Analogy.LogViewer.WindowsEventLogs.Managers;
 using Microsoft.Extensions.Logging;
+using System;
+using System.Drawing;
+using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace Analogy.LogViewer.WindowsEventLogs.IAnalogy
 {
     public class EventLogsDataProviderSettings : TemplateUserSettingsFactory
     {
-
         public override string Title { get; set; } = "Windows Event Logs settings";
         public override UserControl DataProviderSettings { get; set; } 
 

@@ -1,4 +1,9 @@
-﻿using System;
+﻿using Analogy.Interfaces;
+using Analogy.LogViewer.Template;
+using Analogy.LogViewer.Template.Managers;
+using Analogy.LogViewer.WindowsEventLogs.Managers;
+using Microsoft.Extensions.Logging;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
@@ -6,12 +11,6 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Analogy.Interfaces;
-using Analogy.LogViewer.Template;
-using Analogy.LogViewer.Template.Managers;
-using Analogy.LogViewer.WindowsEventLogs.Managers;
-using Microsoft.Extensions.Logging;
-
 
 namespace Analogy.LogViewer.WindowsEventLogs
 {
@@ -28,17 +27,15 @@ namespace Analogy.LogViewer.WindowsEventLogs
 
         public override IAnalogyOfflineDataProvider FileOperationsHandler { get; set; }
         public override bool UseCustomColors { get; set; }
-        public override IEnumerable<(string originalHeader, string replacementHeader)> GetReplacementHeaders()
+        public override IEnumerable<(string OriginalHeader, string ReplacementHeader)> GetReplacementHeaders()
             => Array.Empty<(string, string)>();
 
-        public override (Color backgroundColor, Color foregroundColor) GetColorForMessage(IAnalogyLogMessage logMessage)
+        public override (Color BackgroundColor, Color ForegroundColor) GetColorForMessage(IAnalogyLogMessage logMessage)
             => (Color.Empty, Color.Empty);
         public override Task InitializeDataProvider(ILogger logger)
         {
             return base.InitializeDataProvider(logger);
         }
-
-
         public override Task StartReceiving()
         {
             try
@@ -51,8 +48,6 @@ namespace Analogy.LogViewer.WindowsEventLogs
             }
             return Task.CompletedTask;
         }
-
-
         public override Task StopReceiving() => Task.CompletedTask;
 
         public override Task ShutDown() => Task.CompletedTask;
@@ -75,6 +70,7 @@ namespace Analogy.LogViewer.WindowsEventLogs
                         var eventLog = new EventLog(logName);
                         Logs.Add(eventLog);
                         Counter c = new Counter(logName);
+                        
                         // set event handler
                         eventLog.EntryWritten += (apps, arg) =>
                         {
@@ -152,5 +148,4 @@ namespace Analogy.LogViewer.WindowsEventLogs
             return m;
         }
     }
-
 }

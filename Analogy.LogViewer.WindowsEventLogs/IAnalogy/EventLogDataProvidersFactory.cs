@@ -73,6 +73,10 @@ namespace Analogy.LogViewer.WindowsEventLogs.IAnalogy
         {
             //nop
         }
+        public void MessageSelected(IAnalogyLogMessage message)
+        {
+            //nop
+        }
 
         public async Task<IEnumerable<IAnalogyLogMessage>> Process(CancellationToken token, ILogMessageCreatedHandler messagesHandler)
         {

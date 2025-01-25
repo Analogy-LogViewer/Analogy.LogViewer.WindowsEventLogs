@@ -1,4 +1,5 @@
 ﻿using Analogy.Interfaces;
+using Analogy.Interfaces.DataTypes;
 using Analogy.LogViewer.Template;
 using Analogy.LogViewer.Template.Managers;
 using Analogy.LogViewer.WindowsEventLogs.Managers;
@@ -139,7 +140,7 @@ namespace Analogy.LogViewer.WindowsEventLogs
                     break;
             }
 
-            m.Date = eEntry.TimeGenerated;
+            m.Date = new DateTimeOffset(eEntry.TimeGenerated);
             m.Id = Guid.NewGuid();
             m.Source = eEntry.Source;
             m.Text = eEntry.Message;

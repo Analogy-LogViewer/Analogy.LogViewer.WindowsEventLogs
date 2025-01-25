@@ -1,4 +1,5 @@
 ﻿using Analogy.Interfaces;
+using Analogy.Interfaces.DataTypes;
 using Analogy.LogViewer.Template;
 using Analogy.LogViewer.Template.Managers;
 using Analogy.LogViewer.WindowsEventLogs.Managers;
@@ -44,7 +45,7 @@ namespace Analogy.LogViewer.WindowsEventLogs
         {
             if (CanOpenFile(fileName))
             {
-                DateTime now = DateTime.Now;
+                var now = DateTimeOffset.Now;
                 RaiseProcessingStarted(new AnalogyStartedProcessingArgs());
                 EventViewerLogLoader logLoader = new EventViewerLogLoader(token);
                 var messages = await logLoader.ReadFromFile(fileName, messagesHandler).ConfigureAwait(false);

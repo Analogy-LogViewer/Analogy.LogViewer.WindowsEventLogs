@@ -80,7 +80,7 @@ namespace Analogy.LogViewer.WindowsEventLogs.IAnalogy
 
         public async Task<IEnumerable<IAnalogyLogMessage>> Process(CancellationToken token, ILogMessageCreatedHandler messagesHandler)
         {
-            DateTime now = DateTime.Now;
+            var now = DateTimeOffset.Now;
             ProcessingStarted?.Invoke(this, new AnalogyStartedProcessingArgs());
             EventViewerLogLoader logLoader = new EventViewerLogLoader(token);
             var messages = await logLoader.ReadFromFile(FileNamePath, messagesHandler).ConfigureAwait(false);

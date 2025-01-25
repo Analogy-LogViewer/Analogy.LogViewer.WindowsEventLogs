@@ -52,7 +52,7 @@ namespace Analogy.LogViewer.WindowsEventLogs
                             {
                                 AnalogyLogMessage m = new AnalogyLogMessage
                                 {
-                                    Date = record.TimeCreated ?? DateTime.MinValue,
+                                    Date = new DateTimeOffset(record.TimeCreated ?? DateTime.MinValue),
                                     Source = record.ProviderName,
                                     Module = record.ProviderName,
                                     Level = AnalogyLogLevel.Information,

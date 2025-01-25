@@ -9,14 +9,14 @@
 		<PackageProjectUrl>https://github.com/Analogy-LogViewer/Analogy.LogViewer.WindowsEventLogs</PackageProjectUrl>
 		<RepositoryUrl>https://github.com/Analogy-LogViewer/Analogy.LogViewer.WindowsEventLogs</RepositoryUrl>
 		<PackageIcon>AnalogyWindows.png</PackageIcon>
-		<VersionPrefix>7.2.0</VersionPrefix>
+		<VersionPrefix>8.0.0</VersionPrefix>
 		<VersionSuffix></VersionSuffix>
 		<Company>Analogy.LogViewer</Company>
 	</PropertyGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Analogy.LogViewer.Interfaces" Version="7.2.0" />
-		<PackageReference Include="Analogy.LogViewer.Template" Version="7.2.0" />
+		<PackageReference Include="Analogy.LogViewer.Interfaces" Version="8.0.0" />
+		<PackageReference Include="Analogy.LogViewer.Template" Version="8.0.0" />
 		<PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
 	</ItemGroup>
 	<ItemGroup>

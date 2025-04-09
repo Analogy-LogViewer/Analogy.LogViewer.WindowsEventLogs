@@ -1,6 +1,5 @@
 ﻿using Analogy.LogViewer.Template.Managers;
 using Microsoft.Extensions.Logging;
-using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -23,7 +22,7 @@ namespace Analogy.LogViewer.WindowsEventLogs.Managers
                 try
                 {
                     string data = File.ReadAllText(EventLogSettingFile);
-                    Logs = JsonConvert.DeserializeObject<List<string>>(data);
+                    Logs = System.Text.Json.JsonSerializer.Deserialize<List<string>>(data);
                 }
                 catch (Exception ex)
                 {
@@ -36,7 +35,7 @@ namespace Analogy.LogViewer.WindowsEventLogs.Managers
         {
             try
             {
-                File.WriteAllText(EventLogSettingFile, JsonConvert.SerializeObject(Logs));
+                File.WriteAllText(EventLogSettingFile, System.Text.Json.JsonSerializer.Serialize(Logs));
             }
             catch (Exception ex)
             {

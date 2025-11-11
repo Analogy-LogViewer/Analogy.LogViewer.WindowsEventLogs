@@ -1,5 +1,6 @@
 ﻿using Analogy.Interfaces;
 using Analogy.Interfaces.DataTypes;
+using Analogy.Interfaces.WinForms;
 using Analogy.LogViewer.Template;
 using Analogy.LogViewer.Template.Managers;
 using Analogy.LogViewer.WindowsEventLogs.Managers;
@@ -15,7 +16,7 @@ using System.Windows.Forms;
 
 namespace Analogy.LogViewer.WindowsEventLogs
 {
-    public class RealTimeEventLogs : OnlineDataProvider
+    public class RealTimeEventLogs : OnlineDataProviderWinForms
     {
         private List<EventLog> Logs = new List<EventLog>();
         public override Guid Id { get; set; } = new Guid("407C8AD7-E7A3-4B36-9221-BB5D48E78766");
@@ -26,10 +27,10 @@ namespace Analogy.LogViewer.WindowsEventLogs
         public override string OptionalTitle { get; set; } = "Real Time Windows Event logs";
         public override Task<bool> CanStartReceiving() => Task.FromResult(true);
 
-        public override IAnalogyOfflineDataProvider FileOperationsHandler { get; set; }
+        public override IAnalogyOfflineDataProviderWinForms FileOperationsHandler { get; set; }
         public override bool UseCustomColors { get; set; }
         public override IEnumerable<(string OriginalHeader, string ReplacementHeader)> GetReplacementHeaders()
-            => Array.Empty<(string, string)>();
+            => [];
 
         public override (Color BackgroundColor, Color ForegroundColor) GetColorForMessage(IAnalogyLogMessage logMessage)
             => (Color.Empty, Color.Empty);

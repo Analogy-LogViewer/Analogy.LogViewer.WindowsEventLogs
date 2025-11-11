@@ -8,7 +8,7 @@ using System.Drawing;
 
 namespace Analogy.LogViewer.WindowsEventLogs.IAnalogy
 {
-    public class EventLogPrimaryFactory : PrimaryFactory
+    public class EventLogPrimaryFactory : PrimaryFactoryWinForms
     {
         internal static Guid id = new Guid("3999DB4C-0E22-4795-92C1-61B05EDB3F6C");
     

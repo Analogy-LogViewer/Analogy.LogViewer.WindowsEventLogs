@@ -1,6 +1,7 @@
 ﻿using Analogy.Interfaces;
 using Analogy.Interfaces.DataTypes;
-using Analogy.Interfaces.Factories;
+using Analogy.Interfaces.WinForms;
+using Analogy.Interfaces.WinForms.DataTypes;
 using Analogy.LogViewer.Template;
 using Analogy.LogViewer.Template.Managers;
 using Microsoft.Extensions.Logging;
@@ -14,15 +15,15 @@ using System.Threading.Tasks;
 
 namespace Analogy.LogViewer.WindowsEventLogs.IAnalogy
 {
-    public class EventLogDataProvidersFactory : DataProvidersFactory
+    public class EventLogDataProvidersFactory : DataProvidersFactoryWinForms
     {
         public override Guid FactoryId { get; set; } = EventLogPrimaryFactory.id;
         public override string Title { get; set; } = "Windows Event Log Data Provider";
 
-        public override IEnumerable<IAnalogyDataProvider> DataProviders { get; set; }
+        public override IEnumerable<IAnalogyDataProviderWinForms> DataProviders { get; set; }
         public EventLogDataProvidersFactory()
         {
-            DataProviders = new List<IAnalogyDataProvider>
+            DataProviders = new List<IAnalogyDataProviderWinForms>
             {
                 new RealTimeEventLogs(),
                 new OfflineEventLogDataProvider(),
@@ -34,23 +35,28 @@ namespace Analogy.LogViewer.WindowsEventLogs.IAnalogy
         }
     }
 
-    public class WindowsEventLogFile : IAnalogySingleFileDataProvider
+    public class WindowsEventLogFile : IAnalogySingleFileDataProviderWinForms
     {
         public bool DisableFilePoolingOption { get; } = true;
         public string FileNamePath { get; set; }
         public event EventHandler<AnalogyStartedProcessingArgs>? ProcessingStarted;
         public event EventHandler<AnalogyEndProcessingArgs>? ProcessingFinished;
 
-        public virtual IEnumerable<AnalogyLogMessagePropertyName> HideExistingColumns() => Enumerable.Empty<AnalogyLogMessagePropertyName>();
+        public virtual IEnumerable<AnalogyLogMessagePropertyName> HideExistingColumns() => [];
 
-        public virtual IEnumerable<string> HideAdditionalColumns() => Enumerable.Empty<string>();
+        public virtual IEnumerable<string> HideAdditionalColumns() => [];
 
         public Guid Id { get; set; }
         public Image? LargeImage { get; set; }
         public Image? SmallImage { get; set; }
         public string OptionalTitle { get; set; }
         public bool UseCustomColors { get; set; }
-        public AnalogyToolTip? ToolTip { get; set; }
+        AnalogyToolTip? IAnalogyDataProvider.ToolTip
+        {
+            get => ToolTip;
+            set => ToolTip = value is AnalogyToolTipWinForms tool ? tool : null;
+        }
+        public AnalogyToolTipWinForms? ToolTip { get; set; }
 
         public IEnumerable<(string OriginalHeader, string ReplacementHeader)> GetReplacementHeaders()
             => Array.Empty<(string, string)>();

@@ -9,7 +9,7 @@ using System.Windows.Forms;
 
 namespace Analogy.LogViewer.WindowsEventLogs.IAnalogy
 {
-    public class EventLogsDataProviderSettings : TemplateUserSettingsFactory
+    public class EventLogsDataProviderSettings : TemplateUserSettingsFactoryWinForms
     {
         public override string Title { get; set; } = "Windows Event Logs settings";
         public override UserControl DataProviderSettings { get; set; } 

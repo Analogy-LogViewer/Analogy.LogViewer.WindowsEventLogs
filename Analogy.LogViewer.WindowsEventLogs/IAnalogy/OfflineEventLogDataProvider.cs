@@ -15,7 +15,7 @@ using System.Threading.Tasks;
 
 namespace Analogy.LogViewer.WindowsEventLogs
 {
-    public class OfflineEventLogDataProvider : OfflineDataProvider
+    public class OfflineEventLogDataProvider : OfflineDataProviderWinForms
     {
         public override string OptionalTitle { get; set; } = "Windows Event Log Data Provider";
         public override Guid Id { get; set; } = new Guid("465F4963-71F3-4E50-8253-FA286BF5692B");

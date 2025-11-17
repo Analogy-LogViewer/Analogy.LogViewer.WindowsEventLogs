@@ -2,6 +2,7 @@
 using Analogy.Interfaces.DataTypes;
 using Analogy.LogViewer.Template;
 using Analogy.LogViewer.Template.Managers;
+using Analogy.LogViewer.Template.WinForms;
 using Analogy.LogViewer.WindowsEventLogs.Managers;
 using Microsoft.Extensions.Logging;
 using System;

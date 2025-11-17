@@ -1,9 +1,9 @@
 ﻿using Analogy.Interfaces;
 using Analogy.Interfaces.DataTypes;
 using Analogy.Interfaces.WinForms;
-using Analogy.Interfaces.WinForms.DataTypes;
-using Analogy.LogViewer.Template;
 using Analogy.LogViewer.Template.Managers;
+using Analogy.LogViewer.Template.WinForms;
+using Analogy.LogViewer.WindowsEventLogs.Properties;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
@@ -20,10 +20,10 @@ namespace Analogy.LogViewer.WindowsEventLogs.IAnalogy
         public override Guid FactoryId { get; set; } = EventLogPrimaryFactory.id;
         public override string Title { get; set; } = "Windows Event Log Data Provider";
 
-        public override IEnumerable<IAnalogyDataProviderWinForms> DataProviders { get; set; }
+        public override IEnumerable<IAnalogyDataProvider> DataProviders { get; set; }
         public EventLogDataProvidersFactory()
         {
-            DataProviders = new List<IAnalogyDataProviderWinForms>
+            DataProviders = new List<IAnalogyDataProvider>
             {
                 new RealTimeEventLogs(),
                 new OfflineEventLogDataProvider(),
@@ -47,16 +47,12 @@ namespace Analogy.LogViewer.WindowsEventLogs.IAnalogy
         public virtual IEnumerable<string> HideAdditionalColumns() => [];
 
         public Guid Id { get; set; }
-        public Image? LargeImage { get; set; }
-        public Image? SmallImage { get; set; }
+        public Image? LargeImage { get; set; } = Resources.OperatingSystem_32x32;
+        public Image? SmallImage { get; set; } = Resources.OperatingSystem_16x16;
         public string OptionalTitle { get; set; }
         public bool UseCustomColors { get; set; }
-        AnalogyToolTip? IAnalogyDataProvider.ToolTip
-        {
-            get => ToolTip;
-            set => ToolTip = value is AnalogyToolTipWinForms tool ? tool : null;
-        }
-        public AnalogyToolTipWinForms? ToolTip { get; set; }
+
+        public AnalogyToolTip? ToolTip { get; set; } = new("", "", "");
 
         public IEnumerable<(string OriginalHeader, string ReplacementHeader)> GetReplacementHeaders()
             => Array.Empty<(string, string)>();
@@ -93,5 +89,13 @@ namespace Analogy.LogViewer.WindowsEventLogs.IAnalogy
             ProcessingFinished?.Invoke(this, new AnalogyEndProcessingArgs(now, DateTime.Now, "", messages.Count()));
             return messages;
         }
+
+        public Image? GetDataProviderSmallImage() => SmallImage;
+
+        public Image? GetDataProviderLargeImage() => LargeImage;
+
+        public Image? GetDataProviderToolTipSmallImage() => LargeImage;
+
+        public Image? GetDataProviderToolTipLargeImage() => SmallImage;
     }
 }

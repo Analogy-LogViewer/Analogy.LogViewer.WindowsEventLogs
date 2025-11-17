@@ -1,5 +1,6 @@
 ﻿using Analogy.Interfaces;
 using Analogy.LogViewer.Template;
+using Analogy.LogViewer.Template.WinForms;
 using Analogy.LogViewer.WindowsEventLogs.Managers;
 using Microsoft.Extensions.Logging;
 using System;

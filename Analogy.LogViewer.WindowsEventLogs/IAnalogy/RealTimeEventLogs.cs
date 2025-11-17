@@ -3,6 +3,7 @@ using Analogy.Interfaces.DataTypes;
 using Analogy.Interfaces.WinForms;
 using Analogy.LogViewer.Template;
 using Analogy.LogViewer.Template.Managers;
+using Analogy.LogViewer.Template.WinForms;
 using Analogy.LogViewer.WindowsEventLogs.Managers;
 using Microsoft.Extensions.Logging;
 using System;
@@ -27,7 +28,6 @@ namespace Analogy.LogViewer.WindowsEventLogs
         public override string OptionalTitle { get; set; } = "Real Time Windows Event logs";
         public override Task<bool> CanStartReceiving() => Task.FromResult(true);
 
-        public override IAnalogyOfflineDataProviderWinForms FileOperationsHandler { get; set; }
         public override bool UseCustomColors { get; set; }
         public override IEnumerable<(string OriginalHeader, string ReplacementHeader)> GetReplacementHeaders()
             => [];

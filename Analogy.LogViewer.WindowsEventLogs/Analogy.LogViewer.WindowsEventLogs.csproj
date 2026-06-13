@@ -2,7 +2,7 @@
 	<PropertyGroup>
 		<OutputType>Library</OutputType>
 		<TargetFrameworks>net10.0-windows;net9.0-windows;net8.0-windows;net48</TargetFrameworks>
-		<VersionPrefix>9.0.4</VersionPrefix>
+		<VersionPrefix>9.0.6</VersionPrefix>
 		<VersionSuffix></VersionSuffix>
 		<UseWindowsForms>true</UseWindowsForms>
 		<OutputType>Library</OutputType>
@@ -16,9 +16,12 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Analogy.LogViewer.Interfaces" Version="9.0.2" />
-		<PackageReference Include="Analogy.LogViewer.Template" Version="9.0.3" />
-		<PackageReference Include="Analogy.LogViewer.Template.WinForms" Version="9.0.4" />
+		<PackageReference Include="Analogy.LogViewer.Interfaces" Version="9.0.6" />
+		<PackageReference Include="Analogy.LogViewer.Template" Version="9.0.6" />
+		<PackageReference Include="Analogy.LogViewer.Template.WinForms" Version="9.0.6" />
+		<PackageReference Include="Microsoft.SourceLink.GitHub" Version="10.0.300" PrivateAssets="All" />
+
+		
 	</ItemGroup>
 	<ItemGroup>
 		<Compile Update="Properties\Resources.Designer.cs">
